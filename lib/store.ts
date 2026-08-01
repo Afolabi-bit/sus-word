@@ -52,7 +52,8 @@ export type GameAction =
   | { type: "ELIMINATE_PLAYER"; name: string }
   | { type: "NEXT_ROUND" }
   | { type: "PLAY_AGAIN" }
-  | { type: "NEW_GAME" };
+  | { type: "NEW_GAME" }
+  | { type: "RESET_TO_HOME" };
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -222,6 +223,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     // -- New game (full reset) -----------------------------------------------
     case "NEW_GAME": {
       return { ...initialState, phase: "setup" };
+    }
+
+    case "RESET_TO_HOME": {
+      return { ...initialState, phase: "home" };
     }
 
     default:

@@ -1,14 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Imposter Word Game",
+  title: "SusWord — Imposter Word Game",
   description:
-    "A fully offline, pass-and-play party game. One imposter, one secret word — can you find the faker?",
+    "Find the imposter among your friends! Play offline pass-and-play or join online multiplayer.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Imposter Word Game",
+    title: "SusWord",
+  },
+  icons: {
+    icon: "/icon-192.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -43,7 +48,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ServiceWorkerRegister />
+        {children}
+      </body>
     </html>
   );
 }

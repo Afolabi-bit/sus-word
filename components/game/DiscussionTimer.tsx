@@ -59,7 +59,7 @@ export default function DiscussionTimer() {
 
         {/* Countdown display */}
         <div className="flex flex-col items-center gap-4 w-full">
-          <div className="text-7xl font-bold tabular-nums text-timer font-mono">
+          <div className="text-6xl sm:text-7xl md:text-8xl font-extrabold tabular-nums text-timer font-mono tracking-tight">
             {minutes}:{seconds.toString().padStart(2, "0")}
           </div>
 

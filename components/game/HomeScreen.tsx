@@ -34,7 +34,7 @@ export default function HomeScreen() {
 
   return (
     <GameShell phaseKey="home">
-      <div className="flex flex-col items-center gap-6 text-center w-full max-w-md mx-auto py-2">
+      <div className="flex flex-col items-center gap-6 text-center w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto py-2">
         {/* Brand Header & Logo */}
         <div className="flex items-center gap-4">
           <SusWordLogo size={72} className="drop-shadow-lg shrink-0" />

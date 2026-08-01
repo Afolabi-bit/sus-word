@@ -28,7 +28,7 @@ export default function GameShell({ children, phaseKey }: GameShellProps) {
       animate="animate"
       exit="exit"
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="flex flex-1 flex-col items-center justify-center w-full max-w-md mx-auto px-6 py-10"
+      className="flex flex-1 flex-col items-center justify-center w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-10"
     >
       {children}
     </motion.div>

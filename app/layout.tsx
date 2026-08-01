@@ -1,6 +1,20 @@
 import type { Metadata, Viewport } from "next";
+import { Lato, Germania_One } from "next/font/google";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import "./globals.css";
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-lato",
+});
+
+const germaniaOne = Germania_One({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-germania",
+});
 
 export const metadata: Metadata = {
   title: "SusWord — Imposter Word Game",
@@ -31,7 +45,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="h-full antialiased">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`h-full antialiased ${lato.variable} ${germaniaOne.variable}`}
+    >
       <head>
         {/* Dark mode detection — sets .dark class before first paint */}
         <script
@@ -48,8 +66,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-sans">
         <ServiceWorkerRegister />
+        <PWAInstallPrompt />
         {children}
       </body>
     </html>

@@ -63,7 +63,7 @@ export default function GameOverScreen() {
             <p className="text-xs font-semibold uppercase tracking-widest text-text-secondary">
               The Secret Word
             </p>
-            <p className="text-xl font-bold text-text-primary">{secretWord}</p>
+            <p className="text-2xl font-germania font-normal tracking-wide text-text-primary">{secretWord}</p>
           </div>
         </div>
 

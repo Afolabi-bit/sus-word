@@ -96,7 +96,7 @@ export default function RevealFlow() {
                   <p className="text-sm font-semibold uppercase tracking-widest text-text-secondary">
                     Your word
                   </p>
-                  <h2 className="text-3xl font-bold text-text-primary">
+                  <h2 className="text-4xl font-germania font-normal tracking-wide text-text-primary">
                     {secretWord}
                   </h2>
                   <p className="text-sm text-text-secondary">

@@ -63,7 +63,7 @@ export default function Home() {
     <main className="flex flex-1 flex-col bg-app min-h-screen">
       {/* Navigation Top Header (shown during non-home phases) */}
       {phase !== "home" && (
-        <header className="w-full max-w-md mx-auto px-6 pt-4 pb-2 flex items-center justify-between border-b border-game-border/60">
+        <header className="w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto px-4 sm:px-6 pt-4 pb-2 flex items-center justify-between border-b border-game-border/60">
           <div
             className="flex items-center gap-2 cursor-pointer group"
             onClick={() => handleHomeClick()}

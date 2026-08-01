@@ -61,14 +61,15 @@ export default function VotingScreen() {
         </div>
 
         {/* Player buttons */}
-        <div className="flex flex-col gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
           {activePlayers.map((player) => (
             <button
               key={player}
               onClick={() => handleSelect(player)}
-              className="flex items-center px-5 py-4 rounded-xl bg-game-card border border-game-border text-left font-medium text-text-primary hover:border-accent hover:bg-accent/5 transition-colors active:scale-[0.98]"
+              className="flex items-center justify-between px-5 py-4 rounded-xl bg-game-card border border-game-border text-left font-medium text-text-primary hover:border-accent hover:bg-accent/5 transition-colors active:scale-[0.98] shadow-xs cursor-pointer"
             >
-              {player}
+              <span>{player}</span>
+              <span className="w-2 h-2 rounded-full bg-accent/40"></span>
             </button>
           ))}
         </div>

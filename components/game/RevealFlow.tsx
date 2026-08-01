@@ -76,34 +76,35 @@ export default function RevealFlow() {
               {currentPlayer}&apos;s word
             </p>
 
-            {isImposter ? (
-              /* Imposter reveal */
-              <div className="flex flex-col items-center gap-4 p-8 rounded-2xl bg-imposter w-full">
-                <p className="text-sm font-semibold uppercase tracking-widest text-imposter-text/70">
-                  Your role
-                </p>
-                <h2 className="text-3xl font-bold text-imposter-text">
-                  You are the Imposter!
-                </h2>
-                <p className="text-sm text-imposter-text/80">
-                  You don&apos;t know the secret word. Blend in and don&apos;t
-                  get caught!
-                </p>
-              </div>
-            ) : (
-              /* Civilian reveal */
-              <div className="flex flex-col items-center gap-4 p-8 rounded-2xl bg-game-card border border-game-border w-full">
-                <p className="text-sm font-semibold uppercase tracking-widest text-text-secondary">
-                  Your word
-                </p>
-                <h2 className="text-3xl font-bold text-text-primary">
-                  {secretWord}
-                </h2>
-                <p className="text-sm text-text-secondary">
-                  Remember this word. Don&apos;t say it out loud!
-                </p>
-              </div>
-            )}
+            {/* Role/word reveal — identical container for both roles */}
+            <div className="flex flex-col items-center gap-4 p-8 rounded-2xl bg-game-card border border-game-border w-full">
+              {isImposter ? (
+                <>
+                  <p className="text-sm font-semibold uppercase tracking-widest text-text-secondary">
+                    Your role
+                  </p>
+                  <h2 className="text-3xl font-bold text-text-primary">
+                    You are the Imposter!
+                  </h2>
+                  <p className="text-sm text-text-secondary">
+                    You don&apos;t know the secret word. Blend in and don&apos;t
+                    get caught!
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm font-semibold uppercase tracking-widest text-text-secondary">
+                    Your word
+                  </p>
+                  <h2 className="text-3xl font-bold text-text-primary">
+                    {secretWord}
+                  </h2>
+                  <p className="text-sm text-text-secondary">
+                    Remember this word. Don&apos;t say it out loud!
+                  </p>
+                </>
+              )}
+            </div>
 
             {/* Next button */}
             <Button

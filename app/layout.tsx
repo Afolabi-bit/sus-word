@@ -2,13 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Imposter Word Game",
+  title: "SusWord — Imposter Word Game",
   description:
-    "A fully offline, pass-and-play party game. One imposter, one secret word — can you find the faker?",
+    "Find the imposter among your friends! Play offline pass-and-play or join online multiplayer.",
+
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Imposter Word Game",
+    title: "SusWord",
   },
 };
 

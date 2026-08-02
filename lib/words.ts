@@ -163,7 +163,7 @@ const WORD_LIST: WordEntry[] = [
   { word: "Artist", category: "Professions & Roles" },
   { word: "Writer", category: "Professions & Roles" },
   { word: "Nurse", category: "Professions & Roles" },
-  { word: "Guard", category: "Professions & Roles" },
+  { word: "Tech bro", category: "Professions & Roles" },
   { word: "Sailor", category: "Professions & Roles" },
 ];
 

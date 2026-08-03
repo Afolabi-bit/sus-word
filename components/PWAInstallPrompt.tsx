@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Share, X, Smartphone } from "lucide-react";
+import { useGameStore } from "@/lib/store";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -10,9 +11,18 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export default function PWAInstallPrompt() {
+  const phase = useGameStore((s) => s.phase);
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [bannerType, setBannerType] = useState<"native" | "ios" | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasPlayedOffline, setHasPlayedOffline] = useState(false);
+
+  // Track when user clicks "Play Offline" (game phase transitions away from "home")
+  useEffect(() => {
+    if (phase !== "home") {
+      setHasPlayedOffline(true);
+    }
+  }, [phase]);
 
   useEffect(() => {
     // 1. Check if already running in standalone mode (installed app)
@@ -34,7 +44,6 @@ export default function PWAInstallPrompt() {
 
     if (isIOS && !isStandaloneIOS) {
       setBannerType("ios");
-      setIsVisible(true);
       return;
     }
 
@@ -43,7 +52,6 @@ export default function PWAInstallPrompt() {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       setBannerType("native");
-      setIsVisible(true);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
@@ -52,6 +60,16 @@ export default function PWAInstallPrompt() {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     };
   }, []);
+
+  // Show banner only after user clicks "Play Offline" (hasPlayedOffline becomes true)
+  useEffect(() => {
+    if (hasPlayedOffline && bannerType && !isVisible) {
+      if (typeof window !== "undefined" && sessionStorage.getItem("susword_pwa_dismissed")) {
+        return;
+      }
+      setIsVisible(true);
+    }
+  }, [hasPlayedOffline, bannerType, isVisible]);
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;

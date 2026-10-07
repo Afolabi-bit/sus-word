@@ -26,6 +26,7 @@ export interface GameState {
   activePlayers: string[];
   imposter: string | null;
   secretWord: string | null;
+  secretCategory: string | null;
   revealIndex: number;
   /** Within the reveal flow: false = "pass to player" screen, true = word is shown */
   wordVisible: boolean;
@@ -35,6 +36,10 @@ export interface GameState {
   winner: "civilians" | "imposter" | null;
   /** Discussion timer length in seconds. */
   timerSeconds: number;
+  timerDuration: number;
+  timerStartedAt: number | null;
+  soundEnabled: boolean;
+  hapticsEnabled: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -44,6 +49,9 @@ export interface GameState {
 export type GameAction =
   | { type: "ADD_PLAYER"; name: string }
   | { type: "REMOVE_PLAYER"; name: string }
+  | { type: "SET_TIMER_SECONDS"; seconds: number }
+  | { type: "TOGGLE_SOUND" }
+  | { type: "TOGGLE_HAPTICS" }
   | { type: "START_GAME" }
   | { type: "SHOW_WORD" }
   | { type: "NEXT_REVEAL" }
@@ -59,7 +67,7 @@ export type GameAction =
 // Initial state
 // ---------------------------------------------------------------------------
 
-const TIMER_DURATION = 300; // 5 minutes
+const DEFAULT_TIMER_DURATION = 300; // 5 minutes
 
 const initialState: GameState = {
   phase: "home",
@@ -67,12 +75,17 @@ const initialState: GameState = {
   activePlayers: [],
   imposter: null,
   secretWord: null,
+  secretCategory: null,
   revealIndex: 0,
   wordVisible: false,
   eliminationHistory: [],
   lastEliminated: null,
   winner: null,
-  timerSeconds: TIMER_DURATION,
+  timerSeconds: DEFAULT_TIMER_DURATION,
+  timerDuration: DEFAULT_TIMER_DURATION,
+  timerStartedAt: null,
+  soundEnabled: true,
+  hapticsEnabled: true,
 };
 
 // ---------------------------------------------------------------------------
@@ -96,6 +109,22 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case "SET_TIMER_SECONDS": {
+      return {
+        ...state,
+        timerDuration: action.seconds,
+        timerSeconds: action.seconds,
+      };
+    }
+
+    case "TOGGLE_SOUND": {
+      return { ...state, soundEnabled: !state.soundEnabled };
+    }
+
+    case "TOGGLE_HAPTICS": {
+      return { ...state, hapticsEnabled: !state.hapticsEnabled };
+    }
+
     // -- Start game ----------------------------------------------------------
     case "START_GAME": {
       if (state.phase !== "setup") return state;
@@ -111,12 +140,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activePlayers: [...state.players],
         imposter,
         secretWord: word.word,
+        secretCategory: word.category,
         revealIndex: 0,
         wordVisible: false,
         eliminationHistory: [],
         lastEliminated: null,
         winner: null,
-        timerSeconds: TIMER_DURATION,
+        timerSeconds: state.timerDuration,
+        timerStartedAt: null,
       };
     }
 
@@ -137,13 +168,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     // -- Discussion ----------------------------------------------------------
     case "START_DISCUSSION": {
-      if (state.phase !== "ready" && state.phase !== "result") return state;
-      return { ...state, phase: "discussing", timerSeconds: TIMER_DURATION };
+      if (state.phase !== "ready") return state;
+      return {
+        ...state,
+        phase: "discussing",
+        timerSeconds: state.timerDuration,
+        timerStartedAt: Date.now(),
+      };
     }
 
     case "END_DISCUSSION": {
       if (state.phase !== "discussing") return state;
-      return { ...state, phase: "voting" };
+      return { ...state, phase: "voting", timerStartedAt: null };
     }
 
     // -- Voting / Elimination ------------------------------------------------
@@ -166,6 +202,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           eliminationHistory: newHistory,
           lastEliminated: record,
           winner: "civilians",
+          timerStartedAt: null,
         };
       }
 
@@ -178,6 +215,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           eliminationHistory: newHistory,
           lastEliminated: record,
           winner: "imposter",
+          timerStartedAt: null,
         };
       }
 
@@ -188,13 +226,19 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activePlayers: newActivePlayers,
         eliminationHistory: newHistory,
         lastEliminated: record,
+        timerStartedAt: null,
       };
     }
 
     // -- Next round (from result screen) -------------------------------------
     case "NEXT_ROUND": {
       if (state.phase !== "result") return state;
-      return { ...state, phase: "discussing", timerSeconds: TIMER_DURATION };
+      return {
+        ...state,
+        phase: "discussing",
+        timerSeconds: state.timerDuration,
+        timerStartedAt: Date.now(),
+      };
     }
 
     // -- Play again (same players, new imposter/word) ------------------------
@@ -211,22 +255,38 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         activePlayers: [...state.players],
         imposter,
         secretWord: word.word,
+        secretCategory: word.category,
         revealIndex: 0,
         wordVisible: false,
         eliminationHistory: [],
         lastEliminated: null,
         winner: null,
-        timerSeconds: TIMER_DURATION,
+        timerSeconds: state.timerDuration,
+        timerStartedAt: null,
       };
     }
 
-    // -- New game (full reset) -----------------------------------------------
+    // -- New game (full reset, keeping duration & sound preferences) ---------
     case "NEW_GAME": {
-      return { ...initialState, phase: "setup" };
+      return {
+        ...initialState,
+        timerDuration: state.timerDuration,
+        timerSeconds: state.timerDuration,
+        soundEnabled: state.soundEnabled,
+        hapticsEnabled: state.hapticsEnabled,
+        phase: "setup",
+      };
     }
 
     case "RESET_TO_HOME": {
-      return { ...initialState, phase: "home" };
+      return {
+        ...initialState,
+        timerDuration: state.timerDuration,
+        timerSeconds: state.timerDuration,
+        soundEnabled: state.soundEnabled,
+        hapticsEnabled: state.hapticsEnabled,
+        phase: "home",
+      };
     }
 
     default:

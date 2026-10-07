@@ -1,13 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Lato, Germania_One } from "next/font/google";
+import { Syne, Inter, Germania_One } from "next/font/google";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import "./globals.css";
 
-const lato = Lato({
+const syne = Syne({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  variable: "--font-lato",
+  weight: ["600", "700", "800"],
+  variable: "--font-heading",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
 });
 
 const germaniaOne = Germania_One({
@@ -32,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#EF9F27",
+  themeColor: "#F5A623",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -48,7 +54,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`h-full antialiased ${lato.variable} ${germaniaOne.variable}`}
+      className={`h-full antialiased ${syne.variable} ${inter.variable} ${germaniaOne.variable}`}
     >
       <head>
         {/* Dark mode detection — sets .dark class before first paint */}
@@ -57,9 +63,23 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+                  if (mq.matches) {
                     document.documentElement.classList.add('dark');
                   }
+                  mq.addEventListener('change', function(e) {
+                    document.documentElement.classList.add('no-transitions');
+                    if (e.matches) {
+                      document.documentElement.classList.add('dark');
+                    } else {
+                      document.documentElement.classList.remove('dark');
+                    }
+                    requestAnimationFrame(function() {
+                      requestAnimationFrame(function() {
+                        document.documentElement.classList.remove('no-transitions');
+                      });
+                    });
+                  });
                 } catch(e) {}
               })();
             `,

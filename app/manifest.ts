@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Find the imposter before time runs out",
     start_url: "/",
     display: "standalone",
-    background_color: "#241E33",
-    theme_color: "#EF9F27",
+    background_color: "#131210",
+    theme_color: "#F5A623",
     orientation: "portrait",
     icons: [
       {

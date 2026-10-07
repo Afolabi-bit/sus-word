@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import GameShell from "./GameShell";
 import { useGameFeedback } from "@/lib/audio";
+import OnlineEntryModal from "./OnlineEntryModal";
 
 export default function HomeScreen() {
   const soundEnabled = useGameStore((s) => s.soundEnabled);
@@ -107,31 +108,34 @@ export default function HomeScreen() {
           </CardContent>
         </Card>
 
-        {/* Compact Online Mode Teaser Strip */}
+        {/* Online Multiplayer Mode Card */}
         <button
           type="button"
-          onClick={() => setOnlineModalOpen(true)}
-          className="w-full rounded-2xl border border-border-subtle bg-surface-raised/40 hover:bg-surface-raised px-4 py-3 flex items-center justify-between text-left transition-[background-color,border-color] duration-150 cursor-pointer group active:scale-[0.98]"
+          onClick={() => {
+            feedback.tap();
+            setOnlineModalOpen(true);
+          }}
+          className="w-full rounded-2xl border border-cta/40 bg-surface-raised hover:bg-surface-raised/90 p-4 flex items-center justify-between text-left transition-all duration-150 cursor-pointer group active:scale-[0.98] shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-surface-base border border-border-subtle text-text-secondary group-hover:text-text-primary transition-colors">
-              <Wifi className="w-4 h-4" />
+            <div className="p-2.5 rounded-xl bg-cta/15 text-cta group-hover:scale-105 transition-transform">
+              <Wifi className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-text-primary">
+                <span className="text-sm font-bold text-text-primary">
                   Online Multiplayer
                 </span>
-                <Badge className="bg-surface-base border-border-subtle text-text-secondary text-[11px] font-medium px-1.5 py-0">
-                  Coming Soon
+                <Badge className="bg-win/15 text-win border-win/30 text-[11px] font-semibold px-2 py-0">
+                  Live
                 </Badge>
               </div>
-              <p className="text-xs text-text-secondary">
-                Play on separate phones via room code
+              <p className="text-xs text-text-secondary mt-0.5">
+                Host a room or join with a 6-letter code
               </p>
             </div>
           </div>
-          <ChevronRight className="w-4 h-4 text-text-secondary group-hover:translate-x-0.5 transition-transform" />
+          <ChevronRight className="w-5 h-5 text-cta group-hover:translate-x-0.5 transition-transform" />
         </button>
 
         {/* Permanently Visible "How to Play" Section */}
@@ -224,46 +228,13 @@ export default function HomeScreen() {
         </div>
 
         {/* Footer */}
-        <p className="text-xs text-text-hint pt-0.5">SusWord — Offline</p>
+        <p className="text-xs text-text-hint pt-0.5">SusWord — Offline & Online Multiplayer</p>
 
-        {/* Online Mode Info Modal */}
-        <Dialog open={onlineModalOpen} onOpenChange={setOnlineModalOpen}>
-          <DialogContent className="sm:max-w-xs bg-surface-raised border-border-subtle">
-            <DialogHeader className="text-left">
-              <div className="w-10 h-10 rounded-full bg-surface-base border border-border-subtle flex items-center justify-center text-text-secondary mb-2">
-                <Wifi className="w-5 h-5" />
-              </div>
-              <DialogTitle className="text-xl font-bold text-text-primary">
-                Online Multiplayer
-              </DialogTitle>
-              <DialogDescription className="text-sm text-text-secondary leading-relaxed pt-1">
-                We are actively building the online version of{" "}
-                <strong>SusWord</strong>! Soon you&apos;ll be able to host
-                games, join room codes, and play remotely with friends anywhere.
-              </DialogDescription>
-            </DialogHeader>
-
-            <div className="my-2 p-3.5 rounded-xl bg-surface-base border border-border-subtle text-sm text-text-primary flex flex-col gap-2">
-              <div className="flex items-center gap-2 font-semibold text-text-secondary text-xs">
-                <Bell className="w-4 h-4 text-cta" /> Upcoming Features:
-              </div>
-              <ul className="list-disc list-inside text-text-secondary space-y-1 pl-1 text-xs">
-                <li>Private & Public lobby rooms</li>
-                <li>Real-time online voting & timers</li>
-                <li>Custom word packs & themes</li>
-              </ul>
-            </div>
-
-            <DialogFooter>
-              <Button
-                className="w-full bg-cta text-cta-fg hover:brightness-105 font-semibold text-sm h-11 rounded-xl cursor-pointer"
-                onClick={() => setOnlineModalOpen(false)}
-              >
-                Got It
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        {/* Online Mode Entry Dialog */}
+        <OnlineEntryModal
+          open={onlineModalOpen}
+          onOpenChange={setOnlineModalOpen}
+        />
       </div>
     </GameShell>
   );

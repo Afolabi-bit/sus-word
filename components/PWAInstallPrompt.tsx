@@ -101,31 +101,31 @@ export default function PWAInstallPrompt() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -80, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className="fixed top-0 left-0 right-0 z-50 p-3 sm:p-4 bg-[#241E33]/95 backdrop-blur-md border-b border-[#EF9F27]/40 shadow-2xl text-white"
+          className="fixed top-0 left-0 right-0 z-50 p-3 sm:p-4 bg-surface-raised/95 backdrop-blur-md border-b border-border-subtle shadow-2xl text-text-primary"
         >
           <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
             {/* Left Info Section */}
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#EF9F27]/20 border border-[#EF9F27]/40 flex items-center justify-center shrink-0 text-[#EF9F27]">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cta/15 border border-cta/30 flex items-center justify-center shrink-0 text-cta">
                 {bannerType === "ios" ? (
-                  <Share className="w-5 h-5 text-[#EF9F27]" />
+                  <Share className="w-5 h-5 text-cta" />
                 ) : (
-                  <Smartphone className="w-5 h-5 text-[#EF9F27]" />
+                  <Smartphone className="w-5 h-5 text-cta" />
                 )}
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm font-bold text-amber-300 truncate">
+                <p className="text-xs sm:text-sm font-bold text-text-primary truncate">
                   Install SusWord App
                 </p>
                 {bannerType === "native" && (
-                  <p className="text-[11px] sm:text-xs text-slate-300 truncate">
+                  <p className="text-[11px] sm:text-xs text-text-secondary truncate">
                     Play offline anywhere with single-tap access!
                   </p>
                 )}
                 {bannerType === "ios" && (
-                  <p className="text-[11px] sm:text-xs text-slate-300 flex items-center gap-1 flex-wrap">
-                    Tap <Share className="w-3 h-3 inline text-[#EF9F27]" /> then select{" "}
-                    <span className="font-semibold text-white">"Add to Home Screen"</span>
+                  <p className="text-[11px] sm:text-xs text-text-secondary flex items-center gap-1 flex-wrap">
+                    Tap <Share className="w-3 h-3 inline text-cta" /> then select{" "}
+                    <span className="font-semibold text-text-primary">"Add to Home Screen"</span>
                   </p>
                 )}
               </div>
@@ -136,7 +136,7 @@ export default function PWAInstallPrompt() {
               {bannerType === "native" && (
                 <button
                   onClick={handleInstallClick}
-                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[#EF9F27] hover:bg-[#d98b1d] text-[#1D1726] font-bold text-xs sm:text-sm rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-1.5"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-cta hover:bg-cta/90 text-cta-fg font-bold text-xs sm:text-sm rounded-lg shadow-md transition-[transform,background-color] active:scale-[0.96] flex items-center gap-1.5"
                 >
                   <Download className="w-4 h-4" />
                   <span>Install</span>
@@ -146,7 +146,7 @@ export default function PWAInstallPrompt() {
               <button
                 onClick={handleDismiss}
                 aria-label="Dismiss install prompt"
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition"
+                className="p-1.5 text-text-secondary hover:text-text-primary hover:bg-surface-base/50 rounded-lg transition"
               >
                 <X className="w-4 h-4" />
               </button>

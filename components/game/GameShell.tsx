@@ -7,19 +7,27 @@ interface GameShellProps {
   children: ReactNode;
   /** Optional key for AnimatePresence transitions */
   phaseKey?: string;
+  /** Layout mode: centered (default) or scrollable for long content lists */
+  layout?: "centered" | "scrollable";
 }
 
 const variants = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
+  initial: { opacity: 0, y: 16, filter: "blur(4px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  exit: { opacity: 0, y: -16, filter: "blur(4px)" },
 };
 
 /**
  * Shared layout wrapper for all game screens.
- * Provides centered max-width container, generous padding, and motion transitions.
+ * Uses .layout-container for consistent edge alignment and padding across views.
  */
-export default function GameShell({ children, phaseKey }: GameShellProps) {
+export default function GameShell({
+  children,
+  phaseKey,
+  layout = "centered",
+}: GameShellProps) {
+  const isScrollable = layout === "scrollable";
+
   return (
     <motion.div
       key={phaseKey}
@@ -27,8 +35,12 @@ export default function GameShell({ children, phaseKey }: GameShellProps) {
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.25, ease: "easeOut" }}
-      className="flex flex-1 flex-col items-center justify-center w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-10"
+      transition={{ duration: 0.25, ease: [0.2, 0, 0, 1] }}
+      className={`layout-container w-full flex flex-1 flex-col items-center ${
+        isScrollable
+          ? "justify-start py-6 sm:py-8"
+          : "justify-center py-6 sm:py-8 my-auto"
+      }`}
     >
       {children}
     </motion.div>

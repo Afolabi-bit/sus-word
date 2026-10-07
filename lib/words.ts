@@ -167,12 +167,22 @@ const WORD_LIST: WordEntry[] = [
   { word: "Sailor", category: "Professions & Roles" },
 ];
 
+const RECENT_WORDS = new Set<string>();
+
 /**
- * Returns a random word entry from the full word list.
+ * Returns a random word entry from the word list, preventing repeats
+ * for at least one third of the entire word pool.
  */
 export function getRandomWord(): WordEntry {
-  const index = Math.floor(Math.random() * WORD_LIST.length);
-  return WORD_LIST[index];
+  const available = WORD_LIST.filter((w) => !RECENT_WORDS.has(w.word));
+  const pool = available.length > 0 ? available : WORD_LIST;
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  RECENT_WORDS.add(pick.word);
+  if (RECENT_WORDS.size > Math.floor(WORD_LIST.length / 3)) {
+    const oldest = RECENT_WORDS.values().next().value;
+    if (oldest) RECENT_WORDS.delete(oldest);
+  }
+  return pick;
 }
 
 /** Returns all available categories. */

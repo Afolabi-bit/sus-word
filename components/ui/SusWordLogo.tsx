@@ -21,15 +21,15 @@ export default function SusWordLogo({ size = 96, className = "" }: SusWordLogoPr
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      {/* Orange rounded square background */}
-      <rect width="120" height="120" rx="28" fill="#EF9F27" />
+      {/* Amber rounded square background */}
+      <rect width="120" height="120" rx="28" fill="#F5A623" />
 
       {/* Magnifying glass circle (lens) */}
       <circle
         cx="55"
         cy="52"
         r="26"
-        stroke="#3D2A0E"
+        stroke="#1A1000"
         strokeWidth="7"
         fill="none"
       />
@@ -40,21 +40,21 @@ export default function SusWordLogo({ size = 96, className = "" }: SusWordLogoPr
         y1="72"
         x2="96"
         y2="94"
-        stroke="#3D2A0E"
+        stroke="#1A1000"
         strokeWidth="7"
         strokeLinecap="round"
       />
 
       {/* Suspicious face — left eye */}
-      <circle cx="46" cy="48" r="3.5" fill="#3D2A0E" />
+      <circle cx="46" cy="48" r="3.5" fill="#1A1000" />
 
       {/* Suspicious face — right eye */}
-      <circle cx="64" cy="48" r="3.5" fill="#3D2A0E" />
+      <circle cx="64" cy="48" r="3.5" fill="#1A1000" />
 
       {/* Suspicious face — frown */}
       <path
         d="M46 61 C50 57, 60 57, 64 61"
-        stroke="#3D2A0E"
+        stroke="#1A1000"
         strokeWidth="3.5"
         strokeLinecap="round"
         fill="none"

@@ -50,6 +50,13 @@ export interface GameOverInfo {
   eliminationLog: EliminationRecord[];
 }
 
+export interface VotingResults {
+  tally: Record<string, number>;
+  votes?: Record<string, string>;
+  eliminatedId?: string;
+  isTie: boolean;
+}
+
 export interface OnlineGameState {
   // Connection
   status: ConnectionStatus;
@@ -80,6 +87,11 @@ export interface OnlineGameState {
   winner: "civilians" | "imposter" | null;
   gameOverInfo: GameOverInfo | null;
 
+  // Democratic Voting
+  myVote: string | null;
+  votedPlayerIds: string[];
+  votingResults: VotingResults | null;
+
   // Actions
   createRoom: (hostName: string) => Promise<{ success: boolean; error?: string }>;
   joinRoom: (roomCode: string, displayName: string) => Promise<{ success: boolean; error?: string }>;
@@ -93,6 +105,7 @@ export interface OnlineGameState {
   startDiscussion: () => void;
   endDiscussion: () => void;
   eliminatePlayer: (playerId: string) => void;
+  castVote: (targetPlayerId: string) => void;
   playAgain: () => void;
 }
 
@@ -155,6 +168,9 @@ export const useOnlineStore = create<OnlineGameState>((set, get) => ({
   lastEliminated: null,
   winner: null,
   gameOverInfo: null,
+  myVote: null,
+  votedPlayerIds: [],
+  votingResults: null,
 
   clearError: () => set({ error: null }),
 
@@ -179,6 +195,9 @@ export const useOnlineStore = create<OnlineGameState>((set, get) => ({
       lastEliminated: null,
       winner: null,
       gameOverInfo: null,
+      myVote: null,
+      votedPlayerIds: [],
+      votingResults: null,
     });
   },
 
@@ -287,6 +306,11 @@ export const useOnlineStore = create<OnlineGameState>((set, get) => ({
     sendEnvelope("ELIMINATE_PLAYER", { playerId });
   },
 
+  castVote: (targetPlayerId: string) => {
+    sendEnvelope("CAST_VOTE", { targetPlayerId });
+    set({ myVote: targetPlayerId });
+  },
+
   playAgain: () => {
     sendEnvelope("PLAY_AGAIN");
   },
@@ -388,6 +412,7 @@ function handleIncomingMessage(
         winner: state.winner,
         myPlayerId: me ? me.id : get().myPlayerId,
         isHost,
+        votedPlayerIds: (state as { votedPlayerIds?: string[] }).votedPlayerIds || get().votedPlayerIds,
       });
       break;
     }
@@ -422,6 +447,9 @@ function handleIncomingMessage(
         phase: "discussing",
         timerEndsAt: disc.endsAt,
         timerDuration: disc.durationSeconds,
+        myVote: null,
+        votedPlayerIds: [],
+        votingResults: null,
       });
       break;
     }
@@ -430,7 +458,26 @@ function handleIncomingMessage(
       set({
         phase: "voting",
         timerEndsAt: null,
+        myVote: null,
+        votedPlayerIds: [],
+        votingResults: null,
       });
+      break;
+    }
+
+    case "VOTE_CAST": {
+      const voteData = payload as { voterId: string; totalVotes: number; totalExpected: number };
+      set((prev) => {
+        const ids = new Set(prev.votedPlayerIds);
+        ids.add(voteData.voterId);
+        return { votedPlayerIds: Array.from(ids) };
+      });
+      break;
+    }
+
+    case "VOTING_RESULTS": {
+      const results = payload as VotingResults;
+      set({ votingResults: results });
       break;
     }
 

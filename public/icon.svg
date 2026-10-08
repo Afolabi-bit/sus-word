@@ -1,0 +1,33 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Deep Obsidian Canvas with Precise Noir Border -->
+  <rect width="512" height="512" rx="112" fill="#08090C" />
+  <rect x="4" y="4" width="504" height="504" rx="108" stroke="#181D28" stroke-width="6" />
+
+  <!-- Background Ambient Depth Radial (Subtle Obsidian Luminescence) -->
+  <radialGradient id="bgGlow" cx="50%" cy="40%" r="60%">
+    <stop offset="0%" stop-color="#141824" stop-opacity="0.8" />
+    <stop offset="100%" stop-color="#08090C" stop-opacity="1" />
+  </radialGradient>
+  <rect x="8" y="8" width="496" height="496" rx="104" fill="url(#bgGlow)" />
+
+  <!-- Clean High-Contrast Geometric Monogram "O" with Precision Disguise Slice -->
+  <!-- Outer Ring: Center (256, 256), R=144, Inner Hole: R=74 -->
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M 256 112
+       A 144 144 0 1 0 256 400
+       A 144 144 0 1 0 256 112
+       Z
+       M 256 182
+       A 74 74 0 1 1 256 330
+       A 74 74 0 1 1 256 182
+       Z"
+    fill="#FFFFFF"
+  />
+
+  <!-- The Infiltrator's Unmasked Eye / Slit — Crimson Ruby (#F43F5E) -->
+  <!-- Precision placement at the upper-right quadrant of the "O" -->
+  <circle cx="364" cy="164" r="24" fill="#F43F5E" />
+  <circle cx="364" cy="164" r="12" fill="#FFFFFF" opacity="0.9" />
+</svg>

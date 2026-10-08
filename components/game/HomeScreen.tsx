@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import SusWordLogo from "@/components/ui/SusWordLogo";
 import { useGameStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -41,41 +40,34 @@ export default function HomeScreen() {
     <GameShell phaseKey="home" layout="scrollable">
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-md mx-auto py-2">
         {/* Brand Hero */}
-        <div className="flex flex-col items-center gap-3 pt-2">
-          <div className="relative flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-imposter/20 blur-xl animate-pulse-subtle pointer-events-none" />
-            <SusWordLogo size={80} className="relative drop-shadow-xl shrink-0" />
-          </div>
-
-          <div className="flex flex-col items-center gap-1.5">
-            <h1 className="text-5xl font-extrabold tracking-tight font-germania flex items-center justify-center">
-              <span className="text-imposter">Sus</span>
-              <span className="text-text-primary">Word</span>
-            </h1>
-            <p className="text-sm text-text-secondary leading-relaxed max-w-xs mx-auto">
-              One of you doesn&apos;t know the word. Find them.
-            </p>
-          </div>
+        <div className="flex flex-col items-center gap-2 pt-4 pb-1">
+          <h1 className="text-6xl sm:text-7xl font-black tracking-tight font-heading flex items-center justify-center">
+            <span className="text-text-primary">Odd</span>
+            <span className="text-imposter">word</span>
+          </h1>
+          <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-xs mx-auto">
+            One word. One imposter in plain sight. Can you find the odd one out?
+          </p>
         </div>
 
         {/* Primary Action Card: Offline Pass & Play */}
-        <Card className="w-full relative overflow-hidden rounded-[28px] border-2 border-cta/80 bg-surface-raised shadow-xl transition-[box-shadow,border-color] duration-200">
+        <Card className="w-full relative overflow-hidden rounded-[28px] border border-border-strong bg-surface-raised shadow-xl transition-[box-shadow,border-color] duration-200">
           <CardContent className="p-5 sm:p-6 flex flex-col gap-4 text-left">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="p-2.5 rounded-xl bg-cta/15 text-cta">
+                <div className="p-2.5 rounded-xl bg-surface-base border border-border-subtle text-text-primary">
                   <Smartphone className="w-5 h-5" strokeWidth={2} />
                 </div>
                 <div>
                   <h2 className="font-bold text-lg text-text-primary leading-tight">
                     Pass & Play
                   </h2>
-                  <span className="text-xs font-semibold text-cta">
+                  <span className="text-xs font-semibold text-text-secondary">
                     Offline Party Game
                   </span>
                 </div>
               </div>
-              <Badge className="bg-cta/15 text-cta border-cta/25 font-semibold text-xs px-2.5 py-0.5">
+              <Badge variant="outline" className="bg-surface-base text-text-secondary border-border-subtle font-semibold text-xs px-2.5 py-0.5">
                 Ready
               </Badge>
             </div>
@@ -96,7 +88,7 @@ export default function HomeScreen() {
 
             <Button
               size="lg"
-              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-md hover:brightness-105 active:scale-[0.96] transition-[transform,filter] flex items-center justify-center gap-2 group mt-1 cursor-pointer"
+              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:opacity-90 active:scale-[0.96] transition-[transform,opacity] flex items-center justify-center gap-2 group mt-1 cursor-pointer"
               onClick={() => {
                 feedback.tap();
                 dispatch({ type: "NEW_GAME" });
@@ -115,10 +107,10 @@ export default function HomeScreen() {
             feedback.tap();
             setOnlineModalOpen(true);
           }}
-          className="w-full rounded-2xl border border-cta/40 bg-surface-raised hover:bg-surface-raised/90 p-4 flex items-center justify-between text-left transition-all duration-150 cursor-pointer group active:scale-[0.98] shadow-sm"
+          className="w-full rounded-2xl border border-border-subtle hover:border-border-strong bg-surface-raised hover:bg-surface-raised/90 p-4 flex items-center justify-between text-left transition-[transform,background-color,border-color] duration-150 cursor-pointer group active:scale-[0.96] shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-cta/15 text-cta group-hover:scale-105 transition-transform">
+            <div className="p-2.5 rounded-xl bg-surface-base border border-border-subtle text-text-primary group-hover:scale-105 transition-transform">
               <Wifi className="w-5 h-5" />
             </div>
             <div>
@@ -135,19 +127,19 @@ export default function HomeScreen() {
               </p>
             </div>
           </div>
-          <ChevronRight className="w-5 h-5 text-cta group-hover:translate-x-0.5 transition-transform" />
+          <ChevronRight className="w-5 h-5 text-text-secondary group-hover:text-text-primary group-hover:translate-x-0.5 transition-transform" />
         </button>
 
         {/* Permanently Visible "How to Play" Section */}
         <div className="w-full rounded-2xl border border-border-subtle bg-surface-raised/60 p-4 sm:p-5 text-left flex flex-col gap-3">
           <div className="flex items-center gap-2 text-text-primary font-bold text-sm">
-            <HelpCircle className="w-4 h-4 text-cta" />
+            <HelpCircle className="w-4 h-4 text-text-secondary" />
             <span>How to Play</span>
           </div>
 
           <div className="flex flex-col gap-3 text-sm">
             <div className="flex items-start gap-3">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cta/20 text-cta font-bold text-xs shrink-0 mt-0.5">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-surface-base border border-border-subtle text-text-secondary font-bold text-xs shrink-0 mt-0.5">
                 1
               </span>
               <div>
@@ -162,7 +154,7 @@ export default function HomeScreen() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cta/20 text-cta font-bold text-xs shrink-0 mt-0.5">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-surface-base border border-border-subtle text-text-secondary font-bold text-xs shrink-0 mt-0.5">
                 2
               </span>
               <div>
@@ -177,7 +169,7 @@ export default function HomeScreen() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cta/20 text-cta font-bold text-xs shrink-0 mt-0.5">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-surface-base border border-border-subtle text-text-secondary font-bold text-xs shrink-0 mt-0.5">
                 3
               </span>
               <div>
@@ -228,7 +220,7 @@ export default function HomeScreen() {
         </div>
 
         {/* Footer */}
-        <p className="text-xs text-text-hint pt-0.5">SusWord — Offline & Online Multiplayer</p>
+        <p className="text-xs text-text-hint pt-0.5">Oddword — Party Word Game</p>
 
         {/* Online Mode Entry Dialog */}
         <OnlineEntryModal

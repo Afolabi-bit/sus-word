@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "SusWord — Imposter Word Game",
-    short_name: "SusWord",
-    description: "Find the imposter before time runs out",
+    name: "Oddword — Imposter Party Game",
+    short_name: "Oddword",
+    description: "The party word game of hidden deception. Can you find the odd one out?",
     start_url: "/",
     display: "standalone",
-    background_color: "#131210",
-    theme_color: "#F5A623",
+    background_color: "#0A0C10",
+    theme_color: "#0A0C10",
     orientation: "portrait",
     icons: [
       {

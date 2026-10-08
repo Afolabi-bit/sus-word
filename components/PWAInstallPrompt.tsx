@@ -33,7 +33,7 @@ export default function PWAInstallPrompt() {
     if (isStandalone) return;
 
     // 2. Check if dismissed in this session
-    if (typeof window !== "undefined" && sessionStorage.getItem("susword_pwa_dismissed")) {
+    if (typeof window !== "undefined" && sessionStorage.getItem("oddword_pwa_dismissed")) {
       return;
     }
 
@@ -64,7 +64,7 @@ export default function PWAInstallPrompt() {
   // Show banner only after user clicks "Play Offline" (hasPlayedOffline becomes true)
   useEffect(() => {
     if (hasPlayedOffline && bannerType && !isVisible) {
-      if (typeof window !== "undefined" && sessionStorage.getItem("susword_pwa_dismissed")) {
+      if (typeof window !== "undefined" && sessionStorage.getItem("oddword_pwa_dismissed")) {
         return;
       }
       setIsVisible(true);
@@ -88,7 +88,7 @@ export default function PWAInstallPrompt() {
 
   const handleDismiss = () => {
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("susword_pwa_dismissed", "true");
+      sessionStorage.setItem("oddword_pwa_dismissed", "true");
     }
     setIsVisible(false);
   };
@@ -106,16 +106,16 @@ export default function PWAInstallPrompt() {
           <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
             {/* Left Info Section */}
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cta/15 border border-cta/30 flex items-center justify-center shrink-0 text-cta">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-surface-base border border-border-subtle flex items-center justify-center shrink-0 text-text-primary">
                 {bannerType === "ios" ? (
-                  <Share className="w-5 h-5 text-cta" />
+                  <Share className="w-5 h-5 text-text-primary" />
                 ) : (
-                  <Smartphone className="w-5 h-5 text-cta" />
+                  <Smartphone className="w-5 h-5 text-text-primary" />
                 )}
               </div>
               <div className="min-w-0">
                 <p className="text-xs sm:text-sm font-bold text-text-primary truncate">
-                  Install SusWord App
+                  Install Oddword App
                 </p>
                 {bannerType === "native" && (
                   <p className="text-[11px] sm:text-xs text-text-secondary truncate">
@@ -124,8 +124,8 @@ export default function PWAInstallPrompt() {
                 )}
                 {bannerType === "ios" && (
                   <p className="text-[11px] sm:text-xs text-text-secondary flex items-center gap-1 flex-wrap">
-                    Tap <Share className="w-3 h-3 inline text-cta" /> then select{" "}
-                    <span className="font-semibold text-text-primary">"Add to Home Screen"</span>
+                    Tap <Share className="w-3 h-3 inline text-text-primary" /> then select{" "}
+                    <span className="font-semibold text-text-primary">&quot;Add to Home Screen&quot;</span>
                   </p>
                 )}
               </div>

@@ -13,7 +13,7 @@ import {
   Play,
   Clock,
   LogOut,
-  Sparkles,
+  Loader2,
   Share2,
 } from "lucide-react";
 import GameShell from "./GameShell";
@@ -195,7 +195,7 @@ export default function OnlineLobbyScreen() {
             </Button>
           ) : (
             <div className="p-4 rounded-2xl bg-surface-raised/80 border border-border-subtle flex items-center justify-center gap-2.5 text-text-secondary text-sm font-medium">
-              <Sparkles className="w-4 h-4 text-text-secondary animate-spin" />
+              <Loader2 className="w-4 h-4 text-text-secondary animate-spin" />
               <span>Waiting for the host to start the game...</span>
             </div>
           )}

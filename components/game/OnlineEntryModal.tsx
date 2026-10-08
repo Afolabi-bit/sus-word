@@ -84,7 +84,7 @@ export default function OnlineEntryModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-surface-raised border-border-subtle p-6 rounded-3xl">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader className="text-left space-y-2">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 rounded-2xl bg-surface-base border border-border-subtle text-text-primary flex items-center justify-center">

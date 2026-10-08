@@ -74,9 +74,9 @@ export default function RevealFlow() {
                     handleReveal();
                   }
                 }}
-                className="w-full flex flex-col items-center gap-6 p-7 sm:p-8 rounded-[28px] bg-surface-raised border border-border-subtle shadow-xl cursor-pointer active:scale-[0.98] transition-transform group"
+                className="w-full flex flex-col items-center gap-6 p-7 sm:p-8 rounded-[28px] bg-surface-raised border border-border-subtle shadow-xl cursor-pointer active:scale-[0.96] transition-[transform,background-color,border-color] duration-150 group"
               >
-                <div className="w-16 h-16 rounded-2xl bg-surface-base border border-border-subtle flex items-center justify-center text-text-secondary group-hover:text-cta group-hover:border-cta/40 transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-surface-base border border-border-subtle flex items-center justify-center text-text-secondary group-hover:text-text-primary group-hover:border-border-strong transition-colors">
                   <EyeOff className="w-8 h-8" strokeWidth={2} />
                 </div>
 
@@ -123,7 +123,7 @@ export default function RevealFlow() {
                   </div>
 
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-xs font-bold text-imposter uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-imposter">
                       Secret Role
                     </span>
                     <motion.h2
@@ -158,7 +158,7 @@ export default function RevealFlow() {
                       Your Secret Word
                     </span>
                     {secretCategory && (
-                      <span className="px-2.5 py-0.5 rounded-full bg-surface-base border border-border-subtle text-xs font-semibold text-cta">
+                      <span className="px-2.5 py-0.5 rounded-full bg-surface-base border border-border-subtle text-xs font-semibold text-text-primary">
                         {secretCategory}
                       </span>
                     )}

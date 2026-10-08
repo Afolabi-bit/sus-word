@@ -44,8 +44,8 @@ export default function OnlineLobbyScreen() {
   function handleShare() {
     if (!roomCode || typeof window === "undefined") return;
     const shareData = {
-      title: "Join my SusWord game!",
-      text: `Join my SusWord room: ${roomCode}`,
+      title: "Join my Oddword game!",
+      text: `Join my Oddword room: ${roomCode}`,
       url: window.location.href,
     };
     if (navigator.share) {
@@ -55,7 +55,11 @@ export default function OnlineLobbyScreen() {
     }
   }
 
-  const timerOptions = [30, 60, 90, 120];
+  const timerOptions = [
+    { label: "120s (2m)", seconds: 120 },
+    { label: "3 min", seconds: 180 },
+    { label: "5 min (Max)", seconds: 300 },
+  ];
 
   return (
     <GameShell phaseKey="online-lobby" layout="scrollable">
@@ -153,24 +157,24 @@ export default function OnlineLobbyScreen() {
         {isHost ? (
           <div className="w-full bg-surface-raised border border-border-subtle rounded-3xl p-5 flex flex-col gap-3 text-left">
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-cta" />
+              <Clock className="w-4 h-4 text-text-secondary" />
               <span className="text-xs font-bold text-text-primary">
                 Discussion Timer Duration
               </span>
             </div>
-            <div className="grid grid-cols-4 gap-2">
-              {timerOptions.map((sec) => (
+            <div className="grid grid-cols-3 gap-2">
+              {timerOptions.map((opt) => (
                 <button
-                  key={sec}
+                  key={opt.seconds}
                   type="button"
-                  onClick={() => setTimer(sec)}
+                  onClick={() => setTimer(opt.seconds)}
                   className={`py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
-                    timerDuration === sec
+                    timerDuration === opt.seconds
                       ? "bg-cta text-cta-fg border-cta shadow-sm"
                       : "bg-surface-base border-border-subtle text-text-secondary hover:text-text-primary"
                   }`}
                 >
-                  {sec}s
+                  {opt.label}
                 </button>
               ))}
             </div>
@@ -191,7 +195,7 @@ export default function OnlineLobbyScreen() {
             </Button>
           ) : (
             <div className="p-4 rounded-2xl bg-surface-raised/80 border border-border-subtle flex items-center justify-center gap-2.5 text-text-secondary text-sm font-medium">
-              <Sparkles className="w-4 h-4 text-cta animate-spin" />
+              <Sparkles className="w-4 h-4 text-text-secondary animate-spin" />
               <span>Waiting for the host to start the game...</span>
             </div>
           )}

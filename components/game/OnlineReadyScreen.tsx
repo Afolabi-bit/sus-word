@@ -3,7 +3,7 @@
 import { useOnlineStore } from "@/lib/onlineStore";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageSquare, Play, Sparkles, CheckCircle2 } from "lucide-react";
+import { MessageSquare, Play, Loader2, CheckCircle2 } from "lucide-react";
 import GameShell from "./GameShell";
 
 export default function OnlineReadyScreen() {
@@ -58,7 +58,7 @@ export default function OnlineReadyScreen() {
             </Button>
           ) : (
             <div className="p-4 rounded-2xl bg-surface-raised border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-sm font-medium">
-              <Sparkles className="w-4 h-4 text-text-secondary animate-spin" />
+              <Loader2 className="w-4 h-4 text-text-secondary animate-spin" />
               <span>Waiting for the host to start discussion...</span>
             </div>
           )}

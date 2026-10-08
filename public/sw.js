@@ -1,8 +1,9 @@
-const CACHE_NAME = "oddword-v2";
+const CACHE_NAME = "oddword-v3";
 
 const ASSETS_TO_CACHE = [
   "/",
   "/manifest.webmanifest",
+  "/favicon.ico",
   "/icon.svg",
   "/favicon.png",
   "/icon-192.png",

@@ -12,7 +12,6 @@ const syne = Syne({
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
 });
 
@@ -23,22 +22,22 @@ const germaniaOne = Germania_One({
 });
 
 export const metadata: Metadata = {
-  title: "SusWord — Imposter Word Game",
+  title: "Oddword — Imposter Party Game",
   description:
-    "Find the imposter among your friends! Play offline pass-and-play or join online multiplayer.",
+    "The party word game of hidden deception. Pass your phone around or play online — can you find the odd one out?",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "SusWord",
+    title: "Oddword",
   },
   icons: {
-    icon: "/icon-192.png",
+    icon: "/favicon.png",
     apple: "/apple-touch-icon.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F5A623",
+  themeColor: "#0A0C10",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,

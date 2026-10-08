@@ -14,7 +14,7 @@ export default function ReadyScreen() {
     <GameShell phaseKey="ready">
       <div className="flex flex-col items-center gap-7 text-center w-full max-w-sm mx-auto py-4">
         {/* Neutral Community Icon */}
-        <div className="flex items-center justify-center w-18 h-18 rounded-3xl bg-surface-raised border border-border-subtle text-cta shadow-lg">
+        <div className="flex items-center justify-center w-18 h-18 rounded-3xl bg-surface-raised border border-border-subtle text-text-primary shadow-lg">
           <Users className="w-9 h-9" strokeWidth={2} />
         </div>
 

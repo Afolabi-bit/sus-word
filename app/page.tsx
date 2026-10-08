@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import SusWordLogo from "@/components/ui/SusWordLogo";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import { useGameStore } from "@/lib/store";
 import { useOnlineStore } from "@/lib/onlineStore";
@@ -124,18 +123,17 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <main className="flex flex-1 flex-col bg-surface-base min-h-dvh">
+      <main className="flex flex-1 flex-col bg-surface-base min-h-dvh pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         {/* Navigation Top Header */}
         {showHeader && (
           <header className="layout-container pt-4 pb-3 flex items-center justify-between border-b border-border-subtle/80 sticky top-0 z-40 bg-surface-base/95 backdrop-blur-xs">
             <div
-              className="flex items-center gap-2 cursor-pointer group"
+              className="flex items-center gap-1.5 cursor-pointer group"
               onClick={handleHomeClick}
             >
-              <SusWordLogo size={28} />
-              <span className="font-extrabold text-base tracking-tight">
-                <span className="text-imposter">Sus</span>
-                <span className="text-text-primary">Word</span>
+              <span className="font-black text-lg tracking-tight font-heading">
+                <span className="text-text-primary">Odd</span>
+                <span className="text-imposter">word</span>
               </span>
 
               {isOnline && onlineRoomCode && (

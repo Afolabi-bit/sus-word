@@ -59,7 +59,7 @@ export default function DiscussionTimer() {
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - progress);
 
-  // Urgency color cues: Amber countdown shifting to Crimson in final 15s
+  // Urgency color cues: Signal countdown shifting to Crimson in final 15s
   const isUrgent = remaining <= 15;
 
   const ringStroke = isUrgent
@@ -75,8 +75,8 @@ export default function DiscussionTimer() {
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-sm mx-auto py-2">
         {/* Header Label */}
         <div className="flex flex-col gap-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-text-hint">
-            Phase 2
+          <span className="text-xs font-semibold text-text-hint">
+            Phase 2 · Discussion
           </span>
           <h2 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">
             Time left to discuss

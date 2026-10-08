@@ -127,11 +127,11 @@
   /* ---------------------------------------------------------------- */
   /* Tier 1: Dark Primitives (Velvet Midnight Noir & Slate)           */
   /* ---------------------------------------------------------------- */
-  --midnight-950: #0A0C10;
-  --midnight-900: #131722;
-  --midnight-850: #1C2234;
-  --midnight-800: #252D42;
-  --midnight-700: #35415E;
+  --midnight-950: #08090C;
+  --midnight-900: #10131A;
+  --midnight-850: #181D28;
+  --midnight-800: #222838;
+  --midnight-700: #333D54;
   --midnight-400: #94A3B8;
   --midnight-200: #F1F5F9;
 
@@ -151,12 +151,12 @@
 
   /* Semantic Action Tokens (Stark Monochrome — 18:1 AAA Verified) */
   --color-cta: #FFFFFF;
-  --color-cta-fg: #0A0C10;
-  --color-imposter: var(--ruby-400);
+  --color-cta-fg: #08090C;
+  --color-imposter: #F43F5E;
   --color-imposter-fg: #FFFFFF;
-  --color-win: var(--emerald-400);
+  --color-win: #10B981;
   --color-win-fg: #FFFFFF;
-  --color-lose: var(--ruby-400);
+  --color-lose: #F43F5E;
   --color-lose-fg: #FFFFFF;
 
   /* Timer tokens distinguish from danger and brand */

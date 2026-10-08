@@ -4,7 +4,7 @@ import { useOnlineStore } from "@/lib/onlineStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Play, Sparkles, Users, Vote, Scale } from "lucide-react";
+import { Play, Loader2, Users, Vote, Scale } from "lucide-react";
 import GameShell from "./GameShell";
 
 export default function OnlineResultScreen() {
@@ -121,7 +121,7 @@ export default function OnlineResultScreen() {
             </Button>
           ) : (
             <div className="w-full p-4 rounded-2xl bg-surface-raised border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-xs font-medium">
-              <Sparkles className="w-4 h-4 text-cta animate-spin" />
+              <Loader2 className="w-4 h-4 text-text-secondary animate-spin" />
               <span>Waiting for host to start next round...</span>
             </div>
           )}

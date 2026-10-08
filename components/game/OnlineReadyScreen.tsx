@@ -34,7 +34,7 @@ export default function OnlineReadyScreen() {
         <Card className="w-full bg-surface-raised border-border-subtle rounded-3xl text-left shadow-sm">
           <CardContent className="p-5 flex flex-col gap-3">
             <div className="flex items-center gap-2 text-text-primary font-bold text-xs">
-              <MessageSquare className="w-4 h-4 text-cta" />
+              <MessageSquare className="w-4 h-4 text-text-secondary" />
               <span>Discussion Rules</span>
             </div>
             <ul className="text-xs text-text-secondary space-y-2 list-disc list-inside">
@@ -51,14 +51,14 @@ export default function OnlineReadyScreen() {
             <Button
               size="lg"
               onClick={startDiscussion}
-              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:brightness-105 active:scale-[0.96] transition-[transform,filter] duration-150 flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play className="w-5 h-5 fill-current" />
               Start Discussion ({timerDuration}s)
             </Button>
           ) : (
             <div className="p-4 rounded-2xl bg-surface-raised border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-sm font-medium">
-              <Sparkles className="w-4 h-4 text-cta animate-spin" />
+              <Sparkles className="w-4 h-4 text-text-secondary animate-spin" />
               <span>Waiting for the host to start discussion...</span>
             </div>
           )}

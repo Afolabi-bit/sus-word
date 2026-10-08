@@ -35,11 +35,11 @@ export default function GameShell({
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.25, ease: [0.2, 0, 0, 1] }}
+      transition={{ duration: 0.2, ease: [0.2, 0, 0, 1] }}
       className={`layout-container w-full flex flex-1 flex-col items-center ${
         isScrollable
-          ? "justify-start py-6 sm:py-8"
-          : "justify-center py-6 sm:py-8 my-auto"
+          ? "justify-start py-4 sm:py-6"
+          : "justify-center py-4 sm:py-6 my-auto"
       }`}
     >
       {children}

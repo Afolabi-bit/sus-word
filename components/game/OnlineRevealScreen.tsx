@@ -5,7 +5,7 @@ import { useOnlineStore } from "@/lib/onlineStore";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Eye, EyeOff, Check, User, ShieldAlert, Sparkles, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Check, User, ShieldAlert, AlertCircle } from "lucide-react";
 import GameShell from "./GameShell";
 
 export default function OnlineRevealScreen() {
@@ -52,7 +52,7 @@ export default function OnlineRevealScreen() {
         >
           {isMyTurn ? (
             <>
-              <Sparkles className="w-4 h-4 text-cta animate-spin" />
+              <Eye className="w-4 h-4 text-cta" />
               <span>It&apos;s your turn! Memorize your secret role.</span>
             </>
           ) : (

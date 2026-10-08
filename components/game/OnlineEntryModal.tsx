@@ -87,7 +87,7 @@ export default function OnlineEntryModal({
       <DialogContent className="sm:max-w-md bg-surface-raised border-border-subtle p-6 rounded-3xl">
         <DialogHeader className="text-left space-y-2">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-cta/15 text-cta flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-surface-base border border-border-subtle text-text-primary flex items-center justify-center">
               <Wifi className="w-5 h-5" />
             </div>
             <div>
@@ -172,7 +172,7 @@ export default function OnlineEntryModal({
               type="submit"
               size="lg"
               disabled={isSubmitting}
-              className="w-full h-12 bg-cta text-cta-fg hover:brightness-105 font-bold text-sm rounded-xl cursor-pointer flex items-center justify-center gap-2 active:scale-[0.98]"
+              className="w-full h-12 bg-cta text-cta-fg hover:brightness-105 font-bold text-sm rounded-xl cursor-pointer flex items-center justify-center gap-2 active:scale-[0.96] transition-[transform,filter] duration-150"
             >
               {isSubmitting ? (
                 <>
@@ -233,7 +233,7 @@ export default function OnlineEntryModal({
               type="submit"
               size="lg"
               disabled={isSubmitting}
-              className="w-full h-12 bg-cta text-cta-fg hover:brightness-105 font-bold text-sm rounded-xl cursor-pointer flex items-center justify-center gap-2 active:scale-[0.98]"
+              className="w-full h-12 bg-cta text-cta-fg hover:brightness-105 font-bold text-sm rounded-xl cursor-pointer flex items-center justify-center gap-2 active:scale-[0.96] transition-[transform,filter] duration-150"
             >
               {isSubmitting ? (
                 <>

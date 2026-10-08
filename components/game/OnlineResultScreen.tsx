@@ -23,7 +23,7 @@ export default function OnlineResultScreen() {
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-md mx-auto py-4">
         {/* Status Badge */}
         {isTie ? (
-          <Badge className="bg-cta/20 text-cta border-cta/30 text-xs px-3 py-1 font-bold">
+          <Badge className="bg-surface-raised text-text-primary border-border-subtle text-xs px-3 py-1 font-bold">
             <Scale className="w-3.5 h-3.5 mr-1" /> Tie Vote
           </Badge>
         ) : (
@@ -73,7 +73,7 @@ export default function OnlineResultScreen() {
           <Card className="w-full bg-surface-raised border-border-subtle rounded-3xl text-left shadow-sm">
             <CardContent className="p-4 sm:p-5 flex flex-col gap-2.5">
               <div className="flex items-center gap-2 text-xs font-bold text-text-primary">
-                <Vote className="w-4 h-4 text-cta" />
+                <Vote className="w-4 h-4 text-text-secondary" />
                 <span>Ballot Breakdown</span>
               </div>
               <div className="grid grid-cols-1 gap-1.5 pt-1">
@@ -98,7 +98,7 @@ export default function OnlineResultScreen() {
           <CardContent className="p-4 sm:p-5 flex flex-col gap-2">
             <div className="flex items-center justify-between text-xs font-semibold text-text-secondary">
               <span className="flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-cta" /> Active Survivors
+                <Users className="w-4 h-4 text-text-secondary" /> Active Survivors
               </span>
               <span>{activePlayers.length} remaining</span>
             </div>
@@ -114,7 +114,7 @@ export default function OnlineResultScreen() {
             <Button
               size="lg"
               onClick={startDiscussion}
-              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:brightness-105 active:scale-[0.96] transition-[transform,filter] duration-150 flex items-center justify-center gap-2 cursor-pointer"
             >
               <Play className="w-5 h-5 fill-current" />
               <span>Start Next Round Discussion</span>

@@ -79,7 +79,7 @@ export default function VotingScreen() {
                 className={`flex items-center justify-between px-4 py-3.5 rounded-2xl border text-left font-medium transition-[border-color,background-color,transform] duration-150 active:scale-[0.96] shadow-xs cursor-pointer group ${
                   isSelected
                     ? "border-imposter bg-imposter/15 text-imposter shadow-md"
-                    : "border-border-subtle bg-surface-raised text-text-primary hover:border-cta/50 hover:bg-surface-raised/80"
+                    : "border-border-subtle bg-surface-raised text-text-primary hover:border-border-strong hover:bg-surface-raised/80"
                 }`}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
@@ -95,10 +95,10 @@ export default function VotingScreen() {
                 </div>
 
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="text-xs font-semibold text-text-secondary group-hover:text-cta transition-colors">
+                  <span className="text-xs font-semibold text-text-secondary group-hover:text-text-primary transition-colors">
                     Vote Out
                   </span>
-                  <ChevronRight className="w-4 h-4 text-text-hint group-hover:text-cta group-hover:translate-x-0.5 transition-[transform,color]" />
+                  <ChevronRight className="w-4 h-4 text-text-hint group-hover:text-text-primary group-hover:translate-x-0.5 transition-[transform,color]" />
                 </div>
               </button>
             );

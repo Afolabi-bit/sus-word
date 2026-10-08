@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Vote, CheckCircle2, Crown, Sparkles, UserCheck } from "lucide-react";
 import GameShell from "./GameShell";
+import { getPlayerColour } from "@/lib/utils";
 
 export default function OnlineVotingScreen() {
   const isHost = useOnlineStore((s) => s.isHost);
@@ -16,6 +17,7 @@ export default function OnlineVotingScreen() {
   const myVote = useOnlineStore((s) => s.myVote);
   const votedPlayerIds = useOnlineStore((s) => s.votedPlayerIds);
   const castVote = useOnlineStore((s) => s.castVote);
+  const endVoting = useOnlineStore((s) => s.endVoting);
   const eliminatePlayer = useOnlineStore((s) => s.eliminatePlayer);
 
   const [selectedTargetId, setSelectedTargetId] = useState<string | null>(myVote);
@@ -56,9 +58,9 @@ export default function OnlineVotingScreen() {
         <div className="w-full bg-surface-raised border border-border-subtle rounded-2xl p-3 flex flex-col gap-2">
           <div className="flex items-center justify-between text-xs font-semibold">
             <span className="text-text-secondary flex items-center gap-1.5">
-              <UserCheck className="w-4 h-4 text-cta" /> Ballots Submitted
+              <UserCheck className="w-4 h-4 text-text-secondary" /> Ballots Submitted
             </span>
-            <span className="text-cta font-bold font-mono">
+            <span className="text-text-primary font-bold font-mono">
               {totalVotesCount} / {totalExpectedCount}
             </span>
           </div>
@@ -79,12 +81,15 @@ export default function OnlineVotingScreen() {
             const isMe = p.id === myPlayerId || p.displayName === myPlayerName;
             const playerHasVoted = votedPlayerIds.includes(p.id);
 
+            const avatarColor = getPlayerColour(p.displayName);
+            const initial = p.displayName.trim().charAt(0).toUpperCase();
+
             return (
               <button
                 key={p.id}
                 type="button"
                 onClick={() => setSelectedTargetId(p.id)}
-                className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left transition-all flex items-center justify-between cursor-pointer active:scale-[0.99] ${
+                className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left transition-[transform,background-color,border-color] duration-150 flex items-center justify-between cursor-pointer active:scale-[0.96] ${
                   isSelected
                     ? "bg-destructive/15 border-destructive shadow-md ring-1 ring-destructive/40"
                     : "bg-surface-raised border-border-subtle hover:border-border-strong hover:bg-surface-raised/90"
@@ -92,13 +97,10 @@ export default function OnlineVotingScreen() {
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition-colors ${
-                      isSelected
-                        ? "bg-destructive text-destructive-fg"
-                        : "bg-surface-base text-text-secondary"
-                    }`}
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white shadow-xs shrink-0"
+                    style={{ backgroundColor: avatarColor }}
                   >
-                    {p.displayName.slice(0, 1).toUpperCase()}
+                    {initial}
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5 font-bold text-sm text-text-primary">
@@ -118,7 +120,7 @@ export default function OnlineVotingScreen() {
                     </Badge>
                   )}
                   {p.isHost && (
-                    <Badge className="bg-cta/15 text-cta border-cta/25 text-[10px] px-1.5 py-0 flex items-center gap-1">
+                    <Badge className="bg-surface-base text-text-secondary border-border-subtle text-[10px] px-1.5 py-0 flex items-center gap-1">
                       <Crown className="w-3 h-3" /> Host
                     </Badge>
                   )}
@@ -143,10 +145,10 @@ export default function OnlineVotingScreen() {
             size="lg"
             disabled={!selectedTargetId}
             onClick={handleConfirmVote}
-            className={`w-full h-14 text-base font-bold rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
+            className={`w-full h-14 text-base font-bold rounded-2xl shadow-lg transition-[transform,filter] duration-150 flex items-center justify-center gap-2 cursor-pointer ${
               hasVoted
-                ? "bg-surface-raised text-win border border-win/40 hover:bg-surface-base"
-                : "bg-destructive text-destructive-fg hover:brightness-105 active:scale-[0.98]"
+                ? "bg-surface-raised text-win border border-win/40 hover:bg-surface-base active:scale-[0.96]"
+                : "bg-destructive text-destructive-fg hover:brightness-105 active:scale-[0.96]"
             }`}
           >
             {hasVoted ? (
@@ -170,23 +172,31 @@ export default function OnlineVotingScreen() {
 
           {hasVoted && (
             <div className="p-3 rounded-2xl bg-surface-raised/70 border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-xs font-medium animate-pulse">
-              <Sparkles className="w-3.5 h-3.5 text-cta animate-spin" />
+              <Sparkles className="w-3.5 h-3.5 text-text-secondary animate-spin" />
               <span>
                 Ballot registered! Waiting for remaining players ({totalVotesCount}/{totalExpectedCount})...
               </span>
             </div>
           )}
 
-          {/* Host Emergency Force Tally */}
-          {isHost && selectedTargetId && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => eliminatePlayer(selectedTargetId)}
-              className="text-text-hint hover:text-destructive text-xs py-1 cursor-pointer"
-            >
-              Host: Force Tally / Eliminate Now
-            </Button>
+          {/* Host Stop Voting Early Control */}
+          {isHost && (
+            <div className="w-full pt-1">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={endVoting}
+                disabled={totalVotesCount === 0}
+                className="w-full h-12 text-xs sm:text-sm font-bold rounded-2xl border-border-subtle bg-surface-raised hover:bg-surface-base text-text-primary gap-2 cursor-pointer active:scale-[0.96] transition-[transform,background-color] duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <Vote className="w-4 h-4 text-text-secondary" />
+                <span>
+                  {totalVotesCount > 0
+                    ? `Stop Voting & Tally Early (${totalVotesCount}/${totalExpectedCount} votes)`
+                    : "Waiting for at least 1 ballot to tally"}
+                </span>
+              </Button>
+            </div>
           )}
         </div>
       </div>

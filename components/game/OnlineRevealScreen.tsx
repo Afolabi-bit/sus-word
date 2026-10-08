@@ -68,14 +68,14 @@ export default function OnlineRevealScreen() {
         {/* Secret Card */}
         <Card className="w-full bg-surface-raised border-2 border-border-subtle rounded-3xl overflow-hidden shadow-xl transition-all">
           <CardContent className="p-6 flex flex-col items-center gap-5">
-            <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
+            <span className="text-xs font-semibold text-text-secondary">
               Confidential Assignment
             </span>
 
             {/* Tap to Peek Toggle */}
             <div
               onClick={() => setIsRevealed(!isRevealed)}
-              className="w-full min-h-[170px] rounded-2xl bg-surface-base border border-border-subtle p-6 flex flex-col items-center justify-center gap-3 cursor-pointer select-none active:scale-[0.99] transition-transform"
+              className="w-full min-h-[170px] rounded-2xl bg-surface-base border border-border-subtle p-6 flex flex-col items-center justify-center gap-3 cursor-pointer select-none active:scale-[0.96] transition-[transform,background-color,border-color] duration-150"
             >
               {isRevealed ? (
                 <div className="flex flex-col items-center gap-3 animate-fade-in">
@@ -104,7 +104,7 @@ export default function OnlineRevealScreen() {
                       You do <strong>NOT</strong> know the word! Listen carefully and fake your way through.
                     </div>
                   ) : (
-                    <div className="text-3xl sm:text-4xl font-extrabold text-cta tracking-wide drop-shadow-sm">
+                    <div className="text-3xl sm:text-4xl font-normal text-text-primary tracking-wide drop-shadow-sm font-germania py-1">
                       {secretWord}
                     </div>
                   )}
@@ -115,7 +115,7 @@ export default function OnlineRevealScreen() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2 text-text-secondary">
-                  <div className="w-12 h-12 rounded-full bg-surface-raised border border-border-subtle flex items-center justify-center text-cta">
+                  <div className="w-12 h-12 rounded-full bg-surface-raised border border-border-subtle flex items-center justify-center text-text-primary">
                     <Eye className="w-6 h-6" />
                   </div>
                   <span className="text-sm font-bold text-text-primary">
@@ -134,7 +134,7 @@ export default function OnlineRevealScreen() {
                 size="lg"
                 disabled={hasConfirmed}
                 onClick={handleReady}
-                className="w-full h-13 text-sm font-bold rounded-2xl bg-cta text-cta-fg hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full h-13 text-sm font-bold rounded-2xl bg-cta text-cta-fg hover:brightness-105 active:scale-[0.96] transition-[transform,filter] duration-150 cursor-pointer flex items-center justify-center gap-2"
               >
                 <Check className="w-4 h-4" />
                 {hasConfirmed ? "Confirmed! Waiting for Next..." : "I've Got It (Continue)"}

@@ -81,7 +81,7 @@ export default function GameOverScreen() {
         >
           {/* Imposter Card */}
           <div className="flex flex-col items-center justify-center gap-1.5 p-5 rounded-2xl bg-imposter/15 border border-imposter/30 shadow-md">
-            <span className="text-xs font-semibold text-imposter uppercase tracking-wider">
+            <span className="text-xs font-semibold text-imposter">
               The Imposter
             </span>
             <span className="text-2xl sm:text-3xl font-extrabold text-imposter font-heading">
@@ -109,7 +109,7 @@ export default function GameOverScreen() {
             animate="animate"
             className="flex flex-col gap-3 w-full text-left p-5 rounded-2xl bg-surface-raised/50 border border-border-subtle"
           >
-            <span className="text-xs font-semibold uppercase tracking-wider text-text-hint">
+            <span className="text-xs font-semibold text-text-hint">
               Elimination Timeline
             </span>
 

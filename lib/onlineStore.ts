@@ -104,6 +104,7 @@ export interface OnlineGameState {
   playerReady: () => void;
   startDiscussion: () => void;
   endDiscussion: () => void;
+  endVoting: () => void;
   eliminatePlayer: (playerId: string) => void;
   castVote: (targetPlayerId: string) => void;
   playAgain: () => void;
@@ -158,7 +159,7 @@ export const useOnlineStore = create<OnlineGameState>((set, get) => ({
   phase: "lobby",
   players: [],
   activePlayers: [],
-  timerDuration: 60,
+  timerDuration: 180,
   timerEndsAt: null,
   myRole: null,
   secretWord: null,
@@ -300,6 +301,10 @@ export const useOnlineStore = create<OnlineGameState>((set, get) => ({
 
   endDiscussion: () => {
     sendEnvelope("END_DISCUSSION");
+  },
+
+  endVoting: () => {
+    sendEnvelope("END_VOTING");
   },
 
   eliminatePlayer: (playerId: string) => {

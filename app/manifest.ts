@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "The party word game of hidden deception. Can you find the odd one out?",
     start_url: "/",
     display: "standalone",
-    background_color: "#0A0C10",
-    theme_color: "#0A0C10",
+    background_color: "#08090C",
+    theme_color: "#08090C",
     orientation: "portrait",
     icons: [
       {

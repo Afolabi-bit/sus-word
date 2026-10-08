@@ -1,4 +1,4 @@
-// Generate PWA icon PNGs from the SVG icon using sharp
+// Generate PWA icon PNGs & favicons from the SVG icon using sharp
 // Run: node scripts/generate-icons.mjs
 
 import sharp from 'sharp';
@@ -13,6 +13,8 @@ const sizes = [
   { size: 192, name: 'icon-192.png' },
   { size: 512, name: 'icon-512.png' },
   { size: 180, name: 'apple-touch-icon.png' },
+  { size: 64, name: 'favicon.png' },
+  { size: 512, name: 'logo.png' },
 ];
 
 for (const { size, name } of sizes) {
@@ -23,4 +25,4 @@ for (const { size, name } of sizes) {
   console.log(`✓ Generated public/${name} (${size}×${size})`);
 }
 
-console.log('\nDone! All PWA icons generated.');
+console.log('\nDone! All Oddword icons & favicons generated.');

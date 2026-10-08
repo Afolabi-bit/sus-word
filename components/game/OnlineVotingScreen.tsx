@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useOnlineStore } from "@/lib/onlineStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Vote, CheckCircle2, Crown, Sparkles, UserCheck } from "lucide-react";
+import { Vote, CheckCircle2, Crown, Loader2, UserCheck } from "lucide-react";
 import GameShell from "./GameShell";
 import { getPlayerColour } from "@/lib/utils";
 
@@ -172,7 +172,7 @@ export default function OnlineVotingScreen() {
 
           {hasVoted && (
             <div className="p-3 rounded-2xl bg-surface-raised/70 border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-xs font-medium animate-pulse">
-              <Sparkles className="w-3.5 h-3.5 text-text-secondary animate-spin" />
+              <Loader2 className="w-3.5 h-3.5 text-text-secondary animate-spin" />
               <span>
                 Ballot registered! Waiting for remaining players ({totalVotesCount}/{totalExpectedCount})...
               </span>

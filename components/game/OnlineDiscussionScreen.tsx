@@ -57,14 +57,14 @@ export default function OnlineDiscussionScreen() {
             className={`w-44 h-44 rounded-full border-4 flex flex-col items-center justify-center transition-colors shadow-2xl ${
               isUrgent
                 ? "border-destructive bg-destructive/10 text-destructive animate-pulse"
-                : "border-cta bg-surface-raised text-text-primary"
+                : "border-border-strong bg-surface-raised text-text-primary"
             }`}
           >
-            <Clock className={`w-6 h-6 mb-1 ${isUrgent ? "text-destructive" : "text-cta"}`} />
-            <span className="text-5xl font-black font-mono tracking-tight">
+            <Clock className={`w-6 h-6 mb-1 ${isUrgent ? "text-destructive" : "text-text-secondary"}`} />
+            <span className="text-5xl font-black font-mono tabular-nums tracking-tight">
               {formattedTime}
             </span>
-            <span className="text-[11px] font-semibold text-text-secondary uppercase tracking-widest mt-0.5">
+            <span className="text-[11px] font-semibold text-text-secondary mt-0.5">
               {timeLeft === 0 ? "Time's Up!" : "Discussion"}
             </span>
           </div>
@@ -79,9 +79,9 @@ export default function OnlineDiscussionScreen() {
           <button
             type="button"
             onClick={() => setPeekOpen(!peekOpen)}
-            className="flex items-center justify-center gap-1.5 text-xs font-semibold text-text-secondary hover:text-text-primary py-2 px-3 rounded-xl bg-surface-raised border border-border-subtle mx-auto transition-colors cursor-pointer active:scale-95"
+            className="flex items-center justify-center gap-1.5 text-xs font-semibold text-text-secondary hover:text-text-primary py-2 px-3 rounded-xl bg-surface-raised border border-border-subtle mx-auto transition-colors cursor-pointer active:scale-[0.96]"
           >
-            {peekOpen ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5 text-cta" />}
+            {peekOpen ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5 text-text-secondary" />}
             <span>{peekOpen ? "Hide My Word" : "Peek My Word"}</span>
           </button>
 
@@ -95,7 +95,7 @@ export default function OnlineDiscussionScreen() {
                   <ShieldAlert className="w-3.5 h-3.5" /> IMPOSTER (Word Unknown)
                 </span>
               ) : (
-                <span className="text-cta text-base font-black tracking-wide">
+                <span className="text-text-primary text-base font-normal tracking-wide font-germania">
                   {secretWord}
                 </span>
               )}
@@ -110,7 +110,7 @@ export default function OnlineDiscussionScreen() {
               variant="outline"
               size="lg"
               onClick={endDiscussion}
-              className="w-full h-12 text-sm font-bold rounded-2xl border-border-subtle bg-surface-raised hover:bg-surface-base text-text-primary gap-2 cursor-pointer active:scale-[0.98]"
+              className="w-full h-12 text-sm font-bold rounded-2xl border-border-subtle bg-surface-raised hover:bg-surface-base text-text-primary gap-2 cursor-pointer active:scale-[0.96] transition-[transform,background-color] duration-150"
             >
               <Vote className="w-4 h-4 text-cta" />
               <span>Proceed to Voting Now</span>

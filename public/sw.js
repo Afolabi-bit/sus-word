@@ -1,9 +1,10 @@
-const CACHE_NAME = "susword-v1";
+const CACHE_NAME = "oddword-v2";
 
 const ASSETS_TO_CACHE = [
   "/",
   "/manifest.webmanifest",
   "/icon.svg",
+  "/favicon.png",
   "/icon-192.png",
   "/icon-512.png",
   "/apple-touch-icon.png",

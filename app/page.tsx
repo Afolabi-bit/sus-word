@@ -131,9 +131,8 @@ export default function Home() {
               className="flex items-center gap-1.5 cursor-pointer group"
               onClick={handleHomeClick}
             >
-              <span className="font-black text-lg tracking-tight font-heading">
-                <span className="text-text-primary">Odd</span>
-                <span className="text-imposter">word</span>
+              <span className="font-black text-lg tracking-tight font-heading text-text-primary">
+                Oddword
               </span>
 
               {isOnline && onlineRoomCode && (
@@ -176,7 +175,7 @@ export default function Home() {
 
         {/* Leave Game Confirmation Dialog */}
         <Dialog open={confirmHomeOpen} onOpenChange={setConfirmHomeOpen}>
-          <DialogContent className="sm:max-w-xs bg-surface-raised border-border-subtle rounded-3xl">
+          <DialogContent className="sm:max-w-sm">
             <DialogHeader className="text-left">
               <DialogTitle className="text-lg font-bold text-text-primary">
                 {isOnline ? "Leave Online Room?" : "Return to Main Menu?"}

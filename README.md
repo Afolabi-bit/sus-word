@@ -1,17 +1,17 @@
-# SusWord — Imposter Word Game 🕵️‍♂️💬
+# Oddword — Imposter Party Game 🎭💬
 
 <p align="center">
-  <strong>Find the imposter among your friends before time runs out!</strong><br />
-  A fast-paced, offline-first pass-and-play party game built for mobile & desktop web.
+  <strong>The party word game of hidden deception. Can you find the odd one out?</strong><br />
+  A fast-paced, offline-first & online party game built for mobile & desktop web.
 </p>
 
 ---
 
 ## 🌟 Overview
 
-**SusWord** is a 100% offline, single-device pass-and-play party game designed for 4 to 10 players. One player is secretly assigned as the **Imposter** who does not know the secret word. Everyone else is a **Civilian** who knows the secret word. Players take turns giving subtle clues, discussing, and voting to unmask the faker before time runs out!
+**Oddword** is a fast-paced party game designed for 4 to 10 players, available offline as a single-device pass-and-play experience and online with multiplayer rooms. One player is secretly assigned as the **Imposter** who does not know the secret word. Everyone else is a **Civilian** who knows the secret word. Players take turns giving subtle clues, discussing, and voting to unmask the odd one out before time runs out!
 
-Built with modern web standards as an installable **Progressive Web App (PWA)**, SusWord works completely offline without requiring any server infrastructure, account sign-ups, or internet connectivity.
+Built with modern web standards as an installable **Progressive Web App (PWA)**, Oddword works completely offline without requiring any server infrastructure, account sign-ups, or internet connectivity.
 
 ---
 
@@ -105,12 +105,12 @@ In the project directory, you can run:
 
 ## 📱 PWA & Mobile Installation
 
-SusWord is fully optimized for installation on mobile devices:
+Oddword is fully optimized for installation on mobile devices:
 
 - **iOS (Safari)**: Tap the **Share** button → Select **"Add to Home Screen"**.
-- **Android (Chrome)**: Tap the **Menu (⋮)** → Select **"Install App"** or tap the inline **"Add SusWord to Home screen"** banner.
+- **Android (Chrome)**: Tap the **Menu (⋮)** → Select **"Install App"** or tap the inline **"Add Oddword to Home screen"** banner.
 
-Once installed, SusWord launches in fullscreen standalone mode and functions 100% offline.
+Once installed, Oddword launches in fullscreen standalone mode and functions 100% offline.
 
 ---
 

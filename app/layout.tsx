@@ -31,13 +31,19 @@ export const metadata: Metadata = {
     title: "Oddword",
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png", sizes: "64x64" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0C10",
+  themeColor: "#08090C",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,

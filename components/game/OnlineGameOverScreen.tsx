@@ -4,7 +4,7 @@ import { useOnlineStore } from "@/lib/onlineStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, RotateCcw, Home, Skull, ShieldAlert, Sparkles } from "lucide-react";
+import { Trophy, RotateCcw, Home, Skull, ShieldAlert, Loader2 } from "lucide-react";
 import GameShell from "./GameShell";
 
 export default function OnlineGameOverScreen() {
@@ -123,7 +123,7 @@ export default function OnlineGameOverScreen() {
             </Button>
           ) : (
             <div className="p-3.5 rounded-2xl bg-surface-raised border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-xs font-medium">
-              <Sparkles className="w-4 h-4 text-cta animate-spin" />
+              <Loader2 className="w-4 h-4 text-text-secondary animate-spin" />
               <span>Waiting for the host to start a new match...</span>
             </div>
           )}

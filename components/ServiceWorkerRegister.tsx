@@ -10,6 +10,7 @@ export default function ServiceWorkerRegister() {
           .register("/sw.js")
           .then((reg) => {
             console.log("Oddword PWA Service Worker registered:", reg.scope);
+            reg.update();
           })
           .catch((err) => {
             console.error("Oddword Service Worker registration failed:", err);

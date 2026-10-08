@@ -11,9 +11,9 @@ import GameShell from "./GameShell";
 import { useGameFeedback } from "@/lib/audio";
 
 const TIMER_OPTIONS = [
+  { label: "120s (2m)", seconds: 120 },
   { label: "3 min", seconds: 180 },
   { label: "5 min", seconds: 300 },
-  { label: "7 min", seconds: 420 },
 ];
 
 export default function PlayerSetup() {
@@ -199,7 +199,7 @@ export default function PlayerSetup() {
         {/* Discussion Timer Duration Selector */}
         <div className="flex flex-col gap-2 text-left p-3.5 rounded-2xl bg-surface-raised/60 border border-border-subtle">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-text-secondary">
-            <Clock className="w-3.5 h-3.5 text-cta" />
+            <Clock className="w-3.5 h-3.5 text-text-secondary" />
             <span>Discussion Timer</span>
           </div>
 

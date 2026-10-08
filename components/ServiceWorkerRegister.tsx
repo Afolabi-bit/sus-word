@@ -9,10 +9,10 @@ export default function ServiceWorkerRegister() {
         navigator.serviceWorker
           .register("/sw.js")
           .then((reg) => {
-            console.log("SusWord PWA Service Worker registered:", reg.scope);
+            console.log("Oddword PWA Service Worker registered:", reg.scope);
           })
           .catch((err) => {
-            console.error("SusWord Service Worker registration failed:", err);
+            console.error("Oddword Service Worker registration failed:", err);
           });
       });
     }

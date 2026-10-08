@@ -3,7 +3,7 @@
 import { useEffect, useCallback, useState, useRef } from "react";
 import { useGameStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
-import { SkipForward } from "lucide-react";
+import { ArrowRight, Flame } from "lucide-react";
 import GameShell from "./GameShell";
 import { useGameFeedback } from "@/lib/audio";
 
@@ -67,27 +67,33 @@ export default function DiscussionTimer() {
     : "var(--color-timer)";
 
   const timerTextClass = isUrgent
-    ? "text-imposter animate-pulse-subtle"
-    : "text-timer";
+    ? "text-imposter animate-pulse"
+    : "text-text-primary";
 
   return (
     <GameShell phaseKey="discussing">
-      <div className="flex flex-col items-center gap-6 text-center w-full max-w-sm mx-auto py-2">
+      <div className="flex flex-col items-center gap-7 text-center w-full max-w-sm mx-auto py-2">
         {/* Header Label */}
-        <div className="flex flex-col gap-1">
-          <span className="text-xs font-semibold text-text-hint">
-            Phase 2 · Discussion
+        <div className="flex flex-col gap-1.5">
+          <span className="text-xs font-semibold text-text-hint uppercase tracking-wider">
+            Discussion Phase
           </span>
-          <h2 className="text-xl sm:text-2xl font-bold text-text-primary font-heading">
-            Time left to discuss
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary font-heading">
+            Debate &amp; Deduce
           </h2>
+          <p className="text-xs sm:text-sm text-text-secondary">
+            Give clues about the word without giving it away.
+          </p>
         </div>
 
         {/* Circular Countdown Ring */}
-        <div className="relative w-60 h-60 flex items-center justify-center my-1">
+        <div className="relative w-64 h-64 flex items-center justify-center my-1">
           <svg
             className="w-full h-full -rotate-90 transform"
             viewBox="0 0 220 220"
+            style={{
+              filter: isUrgent ? "drop-shadow(0 0 16px rgba(244, 63, 94, 0.35))" : undefined,
+            }}
           >
             {/* Background track */}
             <circle
@@ -119,35 +125,38 @@ export default function DiscussionTimer() {
           {/* Time digits centered */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span
-              className={`text-5xl sm:text-6xl font-extrabold tabular-nums font-mono tracking-tight transition-colors duration-300 ${timerTextClass}`}
+              className={`text-5xl sm:text-6xl font-black tabular-nums font-heading tracking-tight transition-colors duration-300 ${timerTextClass}`}
             >
               {minutes}:{seconds.toString().padStart(2, "0")}
             </span>
-            <span className="text-xs font-medium text-text-secondary mt-1">
-              {isUrgent ? "Hurry up!" : remaining <= 60 ? "Final minute" : "In progress"}
+            <span className="text-xs font-semibold text-text-secondary mt-1 flex items-center gap-1">
+              {isUrgent ? (
+                <span className="text-imposter flex items-center gap-1 font-bold">
+                  <Flame className="w-3.5 h-3.5 animate-bounce" /> Time Running Out!
+                </span>
+              ) : remaining <= 60 ? (
+                "Final minute"
+              ) : (
+                "Discussion open"
+              )}
             </span>
           </div>
         </div>
 
-        {/* Clue Guidance */}
-        <p className="text-sm text-text-secondary leading-relaxed max-w-xs mx-auto">
-          Give clues about the word. Don&apos;t say it directly. Figure out
-          who&apos;s faking it.
-        </p>
-
-        {/* Secondary Action: Skip / Vote Now */}
-        <Button
-          variant="ghost"
-          size="lg"
-          onClick={() => {
-            feedback.tap();
-            endDiscussion();
-          }}
-          className="w-full h-12 rounded-xl text-text-secondary hover:text-text-primary hover:bg-surface-raised cursor-pointer active:scale-[0.96] transition-[transform,background-color,color]"
-        >
-          <SkipForward className="w-4 h-4 mr-2" />
-          <span>Vote Now</span>
-        </Button>
+        {/* Action: Proceed to Vote Early */}
+        <div className="w-full pt-1">
+          <Button
+            size="lg"
+            onClick={() => {
+              feedback.tap();
+              endDiscussion();
+            }}
+            className="w-full h-13 rounded-2xl bg-surface-raised border border-border-strong hover:bg-surface-raised/80 text-text-primary cursor-pointer active:scale-[0.96] transition-[transform,background-color] font-bold text-sm flex items-center justify-center gap-2 group shadow-sm"
+          >
+            <span>Proceed to Voting</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </div>
       </div>
     </GameShell>
   );

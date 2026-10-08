@@ -3,24 +3,11 @@
 import { useState } from "react";
 import { useGameStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 import {
   Users,
   Wifi,
   Smartphone,
   ArrowRight,
-  ShieldCheck,
-  Bell,
-  ChevronRight,
   HelpCircle,
   Volume2,
   VolumeX,
@@ -28,6 +15,7 @@ import {
 import GameShell from "./GameShell";
 import { useGameFeedback } from "@/lib/audio";
 import OnlineEntryModal from "./OnlineEntryModal";
+import HowToPlayModal from "./HowToPlayModal";
 
 export default function HomeScreen() {
   const soundEnabled = useGameStore((s) => s.soundEnabled);
@@ -35,197 +23,160 @@ export default function HomeScreen() {
   const dispatch = useGameStore((s) => s.dispatch);
   const feedback = useGameFeedback();
   const [onlineModalOpen, setOnlineModalOpen] = useState(false);
+  const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
   return (
     <GameShell phaseKey="home" layout="scrollable">
-      <div className="flex flex-col items-center gap-6 text-center w-full max-w-md mx-auto py-2">
+      <div className="flex flex-col items-center gap-7 text-center w-full max-w-md mx-auto py-2">
+        {/* Top Utility Controls Dock */}
+        <div className="flex items-center justify-between w-full px-1">
+          <button
+            type="button"
+            onClick={() => {
+              feedback.tap();
+              setHowToPlayOpen(true);
+            }}
+            className="flex items-center gap-1.5 text-xs font-semibold text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full bg-surface-raised/80 border border-border-subtle transition-colors cursor-pointer active:scale-[0.96]"
+          >
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>How to Play</span>
+          </button>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => dispatch({ type: "TOGGLE_SOUND" })}
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-raised/80 border border-border-subtle text-text-secondary hover:text-text-primary transition-colors cursor-pointer active:scale-[0.96]"
+              aria-label={soundEnabled ? "Mute audio" : "Enable audio"}
+            >
+              {soundEnabled ? (
+                <Volume2 className="w-4 h-4 text-text-primary" />
+              ) : (
+                <VolumeX className="w-4 h-4 text-text-hint" />
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => dispatch({ type: "TOGGLE_HAPTICS" })}
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-raised/80 border border-border-subtle text-text-secondary hover:text-text-primary transition-colors cursor-pointer active:scale-[0.96]"
+              aria-label={hapticsEnabled ? "Disable vibration" : "Enable vibration"}
+            >
+              <Smartphone
+                className={`w-4 h-4 ${
+                  hapticsEnabled ? "text-text-primary" : "text-text-hint"
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+
         {/* Brand Hero */}
-        <div className="flex flex-col items-center gap-2 pt-4 pb-1">
-          <h1 className="text-6xl sm:text-7xl font-black tracking-tight font-heading flex items-center justify-center">
-            <span className="text-text-primary">Odd</span>
-            <span className="text-imposter">word</span>
+        <div className="flex flex-col items-center gap-2 pt-1 pb-1">
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tight font-heading text-text-primary text-center">
+            Oddword
           </h1>
-          <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-xs mx-auto">
+          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed max-w-xs mx-auto font-normal">
             One word. One imposter in plain sight. Can you find the odd one out?
           </p>
         </div>
 
-        {/* Primary Action Card: Offline Pass & Play */}
-        <Card className="w-full relative overflow-hidden rounded-[28px] border border-border-strong bg-surface-raised shadow-xl transition-[box-shadow,border-color] duration-200">
-          <CardContent className="p-5 sm:p-6 flex flex-col gap-4 text-left">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className="p-2.5 rounded-xl bg-surface-base border border-border-subtle text-text-primary">
+        {/* Mode Selector Deck */}
+        <div className="flex flex-col gap-4 w-full">
+          {/* Mode 1: Pass & Play (Offline Party) */}
+          <div className="w-full relative overflow-hidden rounded-3xl border border-border-subtle bg-surface-raised p-5 sm:p-6 text-left shadow-xl transition-all flex flex-col gap-4">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-surface-base border border-border-subtle flex items-center justify-center text-text-primary shrink-0">
                   <Smartphone className="w-5 h-5" strokeWidth={2} />
                 </div>
                 <div>
-                  <h2 className="font-bold text-lg text-text-primary leading-tight">
+                  <h2 className="font-bold text-lg text-text-primary leading-tight font-heading">
                     Pass & Play
                   </h2>
-                  <span className="text-xs font-semibold text-text-secondary">
-                    Offline Party Game
+                  <span className="text-xs font-medium text-text-hint">
+                    Single Phone · Offline
                   </span>
                 </div>
               </div>
-              <Badge variant="outline" className="bg-surface-base text-text-secondary border-border-subtle font-semibold text-xs px-2.5 py-0.5">
-                Ready
-              </Badge>
+
+              <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-surface-base border border-border-subtle text-text-secondary">
+                4–10 Players
+              </span>
             </div>
 
-            <p className="text-sm text-text-secondary leading-relaxed">
-              Pass your phone around the table. One player is the imposter — they
-              don&apos;t know the secret word.
+            <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+              Pass your phone around the table. Everyone uncovers the secret word except the imposter.
             </p>
-
-            <div className="flex items-center gap-4 text-xs font-medium text-text-secondary pt-1 border-t border-border-subtle">
-              <span className="flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-text-secondary" /> 4–10 Players
-              </span>
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-win" /> 100% Offline
-              </span>
-            </div>
 
             <Button
               size="lg"
-              className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:opacity-90 active:scale-[0.96] transition-[transform,opacity] flex items-center justify-center gap-2 group mt-1 cursor-pointer"
+              className="w-full h-13 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:opacity-90 active:scale-[0.96] transition-[transform,opacity] flex items-center justify-center gap-2 group cursor-pointer"
               onClick={() => {
                 feedback.tap();
                 dispatch({ type: "NEW_GAME" });
               }}
             >
-              <span>Play Offline</span>
+              <span>Start Pass & Play</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-          </CardContent>
-        </Card>
-
-        {/* Online Multiplayer Mode Card */}
-        <button
-          type="button"
-          onClick={() => {
-            feedback.tap();
-            setOnlineModalOpen(true);
-          }}
-          className="w-full rounded-2xl border border-border-subtle hover:border-border-strong bg-surface-raised hover:bg-surface-raised/90 p-4 flex items-center justify-between text-left transition-[transform,background-color,border-color] duration-150 cursor-pointer group active:scale-[0.96] shadow-sm"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-surface-base border border-border-subtle text-text-primary group-hover:scale-105 transition-transform">
-              <Wifi className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-text-primary">
-                  Online Multiplayer
-                </span>
-                <Badge className="bg-win/15 text-win border-win/30 text-[11px] font-semibold px-2 py-0">
-                  Live
-                </Badge>
-              </div>
-              <p className="text-xs text-text-secondary mt-0.5">
-                Host a room or join with a 6-letter code
-              </p>
-            </div>
-          </div>
-          <ChevronRight className="w-5 h-5 text-text-secondary group-hover:text-text-primary group-hover:translate-x-0.5 transition-transform" />
-        </button>
-
-        {/* Permanently Visible "How to Play" Section */}
-        <div className="w-full rounded-2xl border border-border-subtle bg-surface-raised/60 p-4 sm:p-5 text-left flex flex-col gap-3">
-          <div className="flex items-center gap-2 text-text-primary font-bold text-sm">
-            <HelpCircle className="w-4 h-4 text-text-secondary" />
-            <span>How to Play</span>
           </div>
 
-          <div className="flex flex-col gap-3 text-sm">
-            <div className="flex items-start gap-3">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-surface-base border border-border-subtle text-text-secondary font-bold text-xs shrink-0 mt-0.5">
-                1
-              </span>
-              <div>
-                <p className="font-semibold text-text-primary text-xs sm:text-sm">
-                  Pass & Reveal
-                </p>
-                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                  Each player gets the secret word. One player gets something
-                  else entirely.
-                </p>
+          {/* Mode 2: Online Multiplayer */}
+          <div className="w-full relative overflow-hidden rounded-3xl border border-border-subtle bg-surface-raised/80 hover:bg-surface-raised p-5 sm:p-6 text-left shadow-lg transition-all flex flex-col gap-4">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-surface-base border border-border-subtle flex items-center justify-center text-text-primary shrink-0">
+                  <Wifi className="w-5 h-5" strokeWidth={2} />
+                </div>
+                <div>
+                  <h2 className="font-bold text-lg text-text-primary leading-tight font-heading">
+                    Online Multiplayer
+                  </h2>
+                  <span className="text-xs font-medium text-text-hint">
+                    Private Room · Multi-device
+                  </span>
+                </div>
               </div>
+
+              <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-win/15 border border-win/30 text-win flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-win animate-pulse" />
+                Live
+              </span>
             </div>
 
-            <div className="flex items-start gap-3">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-surface-base border border-border-subtle text-text-secondary font-bold text-xs shrink-0 mt-0.5">
-                2
-              </span>
-              <div>
-                <p className="font-semibold text-text-primary text-xs sm:text-sm">
-                  Discuss & Clue
-                </p>
-                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                  Give clues about the word. Don&apos;t say it directly. Figure
-                  out who&apos;s faking it.
-                </p>
-              </div>
-            </div>
+            <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+              Everyone plays on their own device. Host a match or join with a 6-letter room code.
+            </p>
 
-            <div className="flex items-start gap-3">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-surface-base border border-border-subtle text-text-secondary font-bold text-xs shrink-0 mt-0.5">
-                3
-              </span>
-              <div>
-                <p className="font-semibold text-text-primary text-xs sm:text-sm">
-                  Vote & Eliminate
-                </p>
-                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                  Discuss who seems off, then vote them out. Catch the imposter
-                  before they outlast you.
-                </p>
-              </div>
-            </div>
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full h-13 text-base font-bold rounded-2xl border-border-strong bg-surface-base hover:bg-surface-raised text-text-primary active:scale-[0.96] transition-[transform,background-color] flex items-center justify-center gap-2 group cursor-pointer"
+              onClick={() => {
+                feedback.tap();
+                setOnlineModalOpen(true);
+              }}
+            >
+              <span>Host or Join Room</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Button>
           </div>
-        </div>
-
-        {/* Audio & Haptic Settings Quick Toggles */}
-        <div className="flex items-center justify-center gap-2.5 pt-1">
-          <button
-            type="button"
-            onClick={() => dispatch({ type: "TOGGLE_SOUND" })}
-            className="flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full bg-surface-raised border border-border-subtle transition-colors cursor-pointer active:scale-[0.96]"
-          >
-            {soundEnabled ? (
-              <>
-                <Volume2 className="w-3.5 h-3.5 text-cta" />
-                <span>Sound On</span>
-              </>
-            ) : (
-              <>
-                <VolumeX className="w-3.5 h-3.5 text-text-hint" />
-                <span>Muted</span>
-              </>
-            )}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => dispatch({ type: "TOGGLE_HAPTICS" })}
-            className="flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full bg-surface-raised border border-border-subtle transition-colors cursor-pointer active:scale-[0.96]"
-          >
-            <Smartphone
-              className={`w-3.5 h-3.5 ${
-                hapticsEnabled ? "text-cta" : "text-text-hint"
-              }`}
-            />
-            <span>{hapticsEnabled ? "Vibration On" : "Vibration Off"}</span>
-          </button>
         </div>
 
         {/* Footer */}
-        <p className="text-xs text-text-hint pt-0.5">Oddword — Party Word Game</p>
+        <p className="text-xs text-text-hint pt-1">Oddword — The Word Game of Hidden Deception</p>
 
         {/* Online Mode Entry Dialog */}
         <OnlineEntryModal
           open={onlineModalOpen}
           onOpenChange={setOnlineModalOpen}
+        />
+
+        {/* How to Play Drawer */}
+        <HowToPlayModal
+          open={howToPlayOpen}
+          onOpenChange={setHowToPlayOpen}
         />
       </div>
     </GameShell>

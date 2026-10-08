@@ -5,74 +5,80 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ------------------------------------------------------------------ */
-/* Game design tokens                                                  */
+/* Oddword Design Tokens — Midnight Infiltration System               */
+/* Rooted in `better-colors` & `frontend-design`                      */
 /* ------------------------------------------------------------------ */
 
 :root {
   /* ---------------------------------------------------------------- */
-  /* Tier 1: Primitives (Values named by hue & step)                  */
+  /* Tier 1: Primitives — Light Mode                                  */
   /* ---------------------------------------------------------------- */
-  /* Warm Bone & Linen Neutrals (Light Mode, OKLCH h ≈ 85°)           */
-  --stone-50: #F8F6F2;
-  --stone-100: #F1EFEA;
-  --stone-200: #E8E5DD;
-  --stone-300: #D0CBBF;
-  --stone-600: #686257;
-  --stone-700: #544E45;
-  --stone-900: #1C1917;
+  /* Crisp Bone Linen & Slate Neutrals (Light Base)                   */
+  --slate-50: #F8F9FA;
+  --slate-100: #F1F3F5;
+  --slate-200: #E9ECEF;
+  --slate-300: #DEE2E6;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
 
-  /* Brand Accent: Electric Amber / Warm Gold (OKLCH h ≈ 73°)         */
-  --amber-400: #FBBF24;
-  --amber-500: #F5A623;
-  --amber-600: #D97706;
-  --amber-800: #92400E;
-  --amber-950: #181100;
+  /* Brand Accent: Arctic Glacier Cyan (OKLCH h ≈ 215°, zero purple, zero amber) */
+  --cyan-100: #E0F2FE;
+  --cyan-200: #BAE6FD;
+  --cyan-400: #38BDF8;
+  --cyan-500: #0EA5E9;
+  --cyan-600: #0284C7;
+  --cyan-700: #0369A1;
+  --cyan-800: #075985;
+  --cyan-950: #041B2D;
 
-  /* Status Danger / Suspicion / Imposter: Velvet Crimson (h ≈ 18°)   */
-  --crimson-100: #FFE4E6;
-  --crimson-400: #FB7185;
-  --crimson-600: #E11D48;
-  --crimson-700: #BE123C;
-  --crimson-800: #9F1239;
-  --crimson-900: #881337;
-  --crimson-950: #2E0E15;
+  /* Status Danger / Imposter / Loss: Neon Ruby (OKLCH h ≈ 15°)       */
+  --ruby-100: #FFE4E6;
+  --ruby-400: #FB7185;
+  --ruby-600: #E11D48;
+  --ruby-700: #BE123C;
+  --ruby-800: #9F1239;
+  --ruby-950: #2E0B12;
 
-  /* Status Success: Emerald Triumph (OKLCH h ≈ 163°)                 */
+  /* Status Success / Civilian Win: Aurora Emerald (OKLCH h ≈ 155°)   */
   --emerald-100: #D1FAE5;
   --emerald-400: #34D399;
   --emerald-600: #059669;
   --emerald-700: #047857;
   --emerald-800: #065F46;
-  --emerald-950: #06281E;
+  --emerald-950: #02261C;
+
+
 
   /* ---------------------------------------------------------------- */
-  /* Tier 2: Semantics — Light mode (Warm Linen & Gold)               */
+  /* Tier 2: Semantics — Light Mode (Clean Studio Day)                */
   /* ---------------------------------------------------------------- */
-  --surface-base: var(--stone-50);
+  --surface-base: var(--slate-50);
   --surface-raised: #FFFFFF;
   --surface-overlay: #FFFFFF;
 
-  --text-body: var(--stone-900);
-  --text-soft: var(--stone-600);
-  --text-hint: #827B6E;
+  --text-body: var(--slate-900);
+  --text-soft: var(--slate-600);
+  --text-hint: var(--slate-500);
 
-  --border-subtle: var(--stone-200);
-  --border-strong: var(--stone-300);
+  --border-subtle: var(--slate-200);
+  --border-strong: var(--slate-300);
 
-  /* Game semantic tokens (All WCAG AA verified >= 4.5:1) */
-  --color-cta: var(--amber-500);
-  --color-cta-fg: var(--amber-950);
-  --color-imposter: var(--crimson-700);
+  /* Semantic Action Tokens (Stark Monochrome — 18:1 AAA Verified) */
+  --color-cta: var(--slate-900);
+  --color-cta-fg: #FFFFFF;
+  --color-imposter: var(--ruby-700);
   --color-imposter-fg: #FFFFFF;
   --color-win: var(--emerald-700);
   --color-win-fg: #FFFFFF;
-  --color-lose: var(--crimson-700);
+  --color-lose: var(--ruby-700);
   --color-lose-fg: #FFFFFF;
 
-  /* Timer tokens harmonize directly with Accent & Danger */
-  --color-timer: var(--amber-800);
+  /* Timer tokens distinguish from danger and brand */
+  --color-timer: var(--slate-700);
   --color-timer-fg: #FFFFFF;
-  --color-tension: var(--crimson-700);
+  --color-tension: var(--ruby-700);
   --color-tension-fg: #FFFFFF;
 
   /* Backward compatibility aliases */
@@ -103,13 +109,13 @@
   --popover-foreground: var(--text-body);
   --primary: var(--color-cta);
   --primary-foreground: var(--color-cta-fg);
-  --secondary: var(--stone-100);
+  --secondary: var(--slate-100);
   --secondary-foreground: var(--text-body);
-  --muted: var(--stone-200);
+  --muted: var(--slate-200);
   --muted-foreground: var(--text-soft);
-  --shadcn-accent-hover: var(--stone-200);
+  --shadcn-accent-hover: var(--slate-200);
   --accent-foreground: var(--text-body);
-  --destructive: var(--crimson-700);
+  --destructive: var(--ruby-700);
   --destructive-foreground: #FFFFFF;
   --border: var(--border-subtle);
   --input: var(--border-subtle);
@@ -119,44 +125,44 @@
 
 .dark {
   /* ---------------------------------------------------------------- */
-  /* Tier 1: Dark Primitives (Warm Obsidian & Ember Slate)            */
+  /* Tier 1: Dark Primitives (Velvet Midnight Noir & Slate)           */
   /* ---------------------------------------------------------------- */
-  --obsidian-950: #131210;
-  --obsidian-900: #1C1A17;
-  --obsidian-850: #26231F;
-  --obsidian-800: #2E2B25;
-  --obsidian-700: #423D35;
-  --obsidian-400: #A8A296;
-  --obsidian-200: #F5F2EB;
+  --midnight-950: #0A0C10;
+  --midnight-900: #131722;
+  --midnight-850: #1C2234;
+  --midnight-800: #252D42;
+  --midnight-700: #35415E;
+  --midnight-400: #94A3B8;
+  --midnight-200: #F1F5F9;
 
   /* ---------------------------------------------------------------- */
-  /* Tier 2: Semantics — Dark mode (Intimate Night Room)              */
+  /* Tier 2: Semantics — Dark Mode (Intimate Midnight Lounge)         */
   /* ---------------------------------------------------------------- */
-  --surface-base: var(--obsidian-950);
-  --surface-raised: var(--obsidian-900);
-  --surface-overlay: var(--obsidian-850);
+  --surface-base: var(--midnight-950);
+  --surface-raised: var(--midnight-900);
+  --surface-overlay: var(--midnight-850);
 
-  --text-body: var(--obsidian-200);
-  --text-soft: var(--obsidian-400);
-  --text-hint: #787166;
+  --text-body: var(--midnight-200);
+  --text-soft: var(--midnight-400);
+  --text-hint: #64748B;
 
-  --border-subtle: var(--obsidian-800);
-  --border-strong: var(--obsidian-700);
+  --border-subtle: var(--midnight-800);
+  --border-strong: var(--midnight-700);
 
-  /* Game semantic tokens (All WCAG AA verified >= 5.5:1) */
-  --color-cta: var(--amber-500);
-  --color-cta-fg: var(--amber-950);
-  --color-imposter: var(--crimson-400);
+  /* Semantic Action Tokens (Stark Monochrome — 18:1 AAA Verified) */
+  --color-cta: #FFFFFF;
+  --color-cta-fg: #0A0C10;
+  --color-imposter: var(--ruby-400);
   --color-imposter-fg: #FFFFFF;
   --color-win: var(--emerald-400);
   --color-win-fg: #FFFFFF;
-  --color-lose: var(--crimson-400);
+  --color-lose: var(--ruby-400);
   --color-lose-fg: #FFFFFF;
 
-  /* Timer tokens harmonize directly with Accent & Danger */
-  --color-timer: var(--amber-500);
-  --color-timer-fg: var(--amber-950);
-  --color-tension: var(--crimson-400);
+  /* Timer tokens distinguish from danger and brand */
+  --color-timer: var(--slate-300);
+  --color-timer-fg: #0A0C10;
+  --color-tension: var(--ruby-400);
   --color-tension-fg: #FFFFFF;
 
   /* Backward compatibility aliases */
@@ -187,13 +193,13 @@
   --popover-foreground: var(--text-body);
   --primary: var(--color-cta);
   --primary-foreground: var(--color-cta-fg);
-  --secondary: var(--obsidian-850);
+  --secondary: var(--midnight-850);
   --secondary-foreground: var(--text-body);
-  --muted: var(--obsidian-800);
+  --muted: var(--midnight-800);
   --muted-foreground: var(--text-soft);
-  --shadcn-accent-hover: var(--obsidian-800);
+  --shadcn-accent-hover: var(--midnight-800);
   --accent-foreground: var(--text-body);
-  --destructive: var(--crimson-700);
+  --destructive: var(--ruby-700);
   --destructive-foreground: #FFFFFF;
   --border: var(--border-subtle);
   --input: var(--border-subtle);
@@ -283,7 +289,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Sidebar (shadcn defaults — not used in game but prevents errors) */
+  /* Sidebar (shadcn defaults) */
   --color-sidebar-ring: var(--ring);
   --color-sidebar-border: var(--border);
   --color-sidebar-accent-foreground: var(--accent-foreground);
@@ -340,12 +346,12 @@
   }
 }
 
-/* Theme switch transition suppression */
+/* Theme switch transition suppression per better-ui */
 .no-transitions * {
   transition-duration: 0s !important;
 }
 
-/* Hover state safety gate (avoids sticky hover on touch) */
+/* Hover state safety gate (avoids sticky hover on touch per better-ui) */
 @media (hover: hover) {
   .interactive-hover:hover {
     filter: brightness(1.08);
@@ -353,7 +359,7 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Layout container utility                                            */
+/* Layout container utility (Shared across page & header)             */
 /* ------------------------------------------------------------------ */
 
 .layout-container {

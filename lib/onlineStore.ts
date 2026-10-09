@@ -318,6 +318,15 @@ export const useOnlineStore = create<OnlineGameState>((set, get) => ({
 
   playAgain: () => {
     sendEnvelope("PLAY_AGAIN");
+    set({
+      myVote: null,
+      votedPlayerIds: [],
+      votingResults: null,
+      lastEliminated: null,
+      winner: null,
+      gameOverInfo: null,
+      revealTurn: null,
+    });
   },
 }));
 
@@ -396,11 +405,13 @@ function handleIncomingMessage(
         phase: OnlinePhase;
         hostId: string;
         timerDuration: number;
+        timerEndsAt?: string | null;
         players: PublicPlayer[];
         activePlayers: string[];
         eliminationLog: EliminationRecord[];
         lastEliminated: EliminationRecord | null;
         winner: "civilians" | "imposter" | null;
+        votedPlayerIds?: string[];
       };
 
       const myName = get().myPlayerName;
@@ -412,12 +423,14 @@ function handleIncomingMessage(
         players: state.players,
         activePlayers: state.activePlayers,
         timerDuration: state.timerDuration,
+        timerEndsAt: state.timerEndsAt !== undefined ? state.timerEndsAt : get().timerEndsAt,
         eliminationLog: state.eliminationLog || [],
         lastEliminated: state.lastEliminated,
         winner: state.winner,
         myPlayerId: me ? me.id : get().myPlayerId,
         isHost,
-        votedPlayerIds: (state as { votedPlayerIds?: string[] }).votedPlayerIds || get().votedPlayerIds,
+        votedPlayerIds: state.votedPlayerIds || (state.phase === "voting" ? get().votedPlayerIds : []),
+        revealTurn: state.phase === "revealing" ? get().revealTurn : null,
       });
       break;
     }

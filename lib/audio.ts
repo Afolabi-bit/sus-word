@@ -67,7 +67,6 @@ export function playTapSound() {
 }
 
 /**
-/**
  * Pleasant harmonic arpeggio when any player reveals their secret role/word.
  * NOTE: Both civilians and the imposter MUST play the exact same sound & vibration
  * so players sitting together in the room cannot detect roles by ear or phone buzz.

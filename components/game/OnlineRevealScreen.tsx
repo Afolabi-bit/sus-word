@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useOnlineStore } from "@/lib/onlineStore";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Eye, EyeOff, Check, User, ShieldAlert, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Check, User, ShieldAlert, AlertCircle, FastForward } from "lucide-react";
 import GameShell from "./GameShell";
 
 export default function OnlineRevealScreen() {
+  const isHost = useOnlineStore((s) => s.isHost);
   const myRole = useOnlineStore((s) => s.myRole);
   const secretWord = useOnlineStore((s) => s.secretWord);
   const secretCategory = useOnlineStore((s) => s.secretCategory);
@@ -18,6 +19,11 @@ export default function OnlineRevealScreen() {
 
   const [isRevealed, setIsRevealed] = useState(false);
   const [hasConfirmed, setHasConfirmed] = useState(false);
+
+  useEffect(() => {
+    setHasConfirmed(false);
+    setIsRevealed(false);
+  }, [revealTurn?.currentPlayerId]);
 
   const isMyTurn = revealTurn?.currentPlayerId === myPlayerId;
   const isImposter = myRole === "imposter";
@@ -140,8 +146,21 @@ export default function OnlineRevealScreen() {
                 {hasConfirmed ? "Confirmed! Waiting for Next..." : "I've Got It (Continue)"}
               </Button>
             ) : (
-              <div className="text-xs text-text-secondary">
-                You can review your role anytime by tapping the card above.
+              <div className="w-full flex flex-col items-center gap-2">
+                <div className="text-xs text-text-secondary">
+                  You can review your role anytime by tapping the card above.
+                </div>
+                {isHost && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={playerReady}
+                    className="text-xs text-text-secondary hover:text-text-primary border-border-subtle hover:bg-surface-base h-9 px-3 rounded-xl mt-1 cursor-pointer flex items-center gap-1.5"
+                  >
+                    <FastForward className="w-3.5 h-3.5" />
+                    <span>Skip Turn (Host Override)</span>
+                  </Button>
+                )}
               </div>
             )}
           </CardContent>

@@ -119,7 +119,7 @@ export default function OnlineGameOverScreen() {
               className="w-full h-14 text-base font-bold rounded-2xl bg-cta text-cta-fg shadow-lg hover:brightness-105 active:scale-[0.96] transition-[transform,filter] duration-150 flex items-center justify-center gap-2 cursor-pointer"
             >
               <RotateCcw className="w-5 h-5" />
-              <span>Play Again (Return to Lobby)</span>
+              <span>Play Again (New Match)</span>
             </Button>
           ) : (
             <div className="p-3.5 rounded-2xl bg-surface-raised border border-border-subtle flex items-center justify-center gap-2 text-text-secondary text-xs font-medium">

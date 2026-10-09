@@ -98,7 +98,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case "ADD_PLAYER": {
       if (state.phase !== "setup") return state;
       if (state.players.length >= 10) return state;
-      return { ...state, players: [...state.players, action.name] };
+      const trimmed = action.name.trim();
+      if (!trimmed || state.players.some((p) => p.toLowerCase() === trimmed.toLowerCase())) {
+        return state;
+      }
+      return { ...state, players: [...state.players, trimmed] };
     }
 
     case "REMOVE_PLAYER": {
@@ -161,7 +165,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.phase !== "revealing") return state;
       const nextIndex = state.revealIndex + 1;
       if (nextIndex >= state.players.length) {
-        return { ...state, phase: "ready", revealIndex: nextIndex, wordVisible: false };
+        return { ...state, phase: "ready", revealIndex: 0, wordVisible: false };
       }
       return { ...state, revealIndex: nextIndex, wordVisible: false };
     }

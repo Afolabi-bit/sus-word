@@ -17,6 +17,10 @@ export default function RevealFlow() {
   const dispatch = useGameStore((s) => s.dispatch);
   const feedback = useGameFeedback();
 
+  if (revealIndex >= players.length || !players[revealIndex]) {
+    return null;
+  }
+
   const currentPlayer = players[revealIndex];
   const isImposter = currentPlayer === imposter;
 
@@ -31,7 +35,7 @@ export default function RevealFlow() {
   }
 
   return (
-    <GameShell phaseKey={`reveal-${revealIndex}-${wordVisible}`}>
+    <GameShell phaseKey="offline-reveal">
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-md mx-auto py-2">
         {/* Pagination Dots Progress */}
         <div className="flex flex-col items-center gap-2">
